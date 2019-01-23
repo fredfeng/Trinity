@@ -1,0 +1,534 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.dsl package &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tyrell.enumerator package" href="tyrell.enumerator.html" />
+    <link rel="prev" title="tyrell.decider package" href="tyrell.decider.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tyrell-dsl-package">
+<h1>tyrell.dsl package<a class="headerlink" href="#tyrell-dsl-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tyrell.dsl.builder">
+<span id="tyrell-dsl-builder-module"></span><h2>tyrell.dsl.builder module<a class="headerlink" href="#module-tyrell.dsl.builder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.dsl.builder.Builder">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.builder.</code><code class="descname">Builder</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A factory class to build AST node</p>
+<dl class="method">
+<dt id="tyrell.dsl.builder.Builder.from_sexp_string">
+<code class="descname">from_sexp_string</code><span class="sig-paren">(</span><em>sexp_str: str</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder.from_sexp_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder.from_sexp_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient method to create an AST from an sexp string.
+Raise <cite>KeyError</cite> or <cite>ValueError</cite> if an error occurs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.Builder.make_apply">
+<code class="descname">make_apply</code><span class="sig-paren">(</span><em>name: str, args: List[tyrell.dsl.node.Node]</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder.make_apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder.make_apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient method to create an apply node.
+Raise <cite>KeyError</cite> or <cite>ValueError</cite> if an error occurs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.Builder.make_enum">
+<code class="descname">make_enum</code><span class="sig-paren">(</span><em>name: str</em>, <em>value: str</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder.make_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder.make_enum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient method to create an enum node.
+Raise <cite>KeyError</cite> or <cite>ValueError</cite> if an error occurs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.Builder.make_node">
+<code class="descname">make_node</code><span class="sig-paren">(</span><em>src: Union[int, tyrell.spec.production.Production], children: List[tyrell.dsl.node.Node] = []</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder.make_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder.make_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a node with the given production index and children.
+Raise <cite>KeyError</cite> or <cite>ValueError</cite> if an error occurs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.Builder.make_param">
+<code class="descname">make_param</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#Builder.make_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.Builder.make_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenient method to create a param node.
+Raise <cite>KeyError</cite> or <cite>ValueError</cite> if an error occurs</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.dsl.builder.ProductionVisitor">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.builder.</code><code class="descname">ProductionVisitor</code><span class="sig-paren">(</span><em>children: List[tyrell.dsl.node.Node]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/builder.html#ProductionVisitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.ProductionVisitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.html#tyrell.visitor.GenericVisitor" title="tyrell.visitor.GenericVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.visitor.GenericVisitor</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.dsl.builder.ProductionVisitor.visit_enum_production">
+<code class="descname">visit_enum_production</code><span class="sig-paren">(</span><em>prod</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#ProductionVisitor.visit_enum_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.ProductionVisitor.visit_enum_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.ProductionVisitor.visit_function_production">
+<code class="descname">visit_function_production</code><span class="sig-paren">(</span><em>prod</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#ProductionVisitor.visit_function_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.ProductionVisitor.visit_function_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.builder.ProductionVisitor.visit_param_production">
+<code class="descname">visit_param_production</code><span class="sig-paren">(</span><em>prod</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/builder.html#ProductionVisitor.visit_param_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.builder.ProductionVisitor.visit_param_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl.indexer">
+<span id="tyrell-dsl-indexer-module"></span><h2>tyrell.dsl.indexer module<a class="headerlink" href="#module-tyrell.dsl.indexer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.dsl.indexer.NodeIndexer">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.indexer.</code><code class="descname">NodeIndexer</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/indexer.html#NodeIndexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A utility class providing bidirectional mapping between AST Node and integer ID.</p>
+<dl class="method">
+<dt id="tyrell.dsl.indexer.NodeIndexer.get_id">
+<code class="descname">get_id</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; Optional[int]<a class="reference internal" href="../_modules/tyrell/dsl/indexer.html#NodeIndexer.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.get_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ID of the node, or None if the node is not indexed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.indexer.NodeIndexer.get_id_or_raise">
+<code class="descname">get_id_or_raise</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/dsl/indexer.html#NodeIndexer.get_id_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.get_id_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ID of the node, or raise <cite>KeyError</cite> if the node is not indexed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.indexer.NodeIndexer.get_node">
+<code class="descname">get_node</code><span class="sig-paren">(</span><em>nid: int</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/dsl/indexer.html#NodeIndexer.get_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.get_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Node which corresponds to the given ID, or None if the ID is not assigned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.indexer.NodeIndexer.get_node_or_raise">
+<code class="descname">get_node_or_raise</code><span class="sig-paren">(</span><em>nid: int</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/indexer.html#NodeIndexer.get_node_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.get_node_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Node which corresponds to the given ID, or raise <cite>KeyError</cite> if the ID is not assigned.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.indexer.NodeIndexer.indices">
+<code class="descname">indices</code><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.indexer.NodeIndexer.nodes">
+<code class="descname">nodes</code><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.indexer.NodeIndexer.num_nodes">
+<code class="descname">num_nodes</code><a class="headerlink" href="#tyrell.dsl.indexer.NodeIndexer.num_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl.iterator">
+<span id="tyrell-dsl-iterator-module"></span><h2>tyrell.dsl.iterator module<a class="headerlink" href="#module-tyrell.dsl.iterator" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tyrell.dsl.iterator.bfs">
+<code class="descclassname">tyrell.dsl.iterator.</code><code class="descname">bfs</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; Iterator[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/dsl/iterator.html#bfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.iterator.bfs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.dsl.iterator.dfs">
+<code class="descclassname">tyrell.dsl.iterator.</code><code class="descname">dfs</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; Iterator[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/dsl/iterator.html#dfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.iterator.dfs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl.node">
+<span id="tyrell-dsl-node-module"></span><h2>tyrell.dsl.node module<a class="headerlink" href="#module-tyrell.dsl.node" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.dsl.node.ApplyNode">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.node.</code><code class="descname">ApplyNode</code><span class="sig-paren">(</span><em>prod: tyrell.spec.production.Production, args: List[tyrell.dsl.node.Node]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.dsl.node.Node" title="tyrell.dsl.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.dsl.node.Node</span></code></a></p>
+<p>Internal AST node that represent function application</p>
+<dl class="attribute">
+<dt id="tyrell.dsl.node.ApplyNode.args">
+<code class="descname">args</code><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.ApplyNode.children">
+<code class="descname">children</code><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.deep_eq">
+<code class="descname">deep_eq</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.deep_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.deep_eq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether this node is the same with <code class="docutils literal notranslate"><span class="pre">other</span></code>. This function performs deep comparison rather than just comparing the object identity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.deep_hash">
+<code class="descname">deep_hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.deep_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.deep_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function performs deep hash rather than just hashing the object identity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.is_apply">
+<code class="descname">is_apply</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.is_apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.is_apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.is_leaf">
+<code class="descname">is_leaf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.is_leaf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.is_leaf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.ApplyNode.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ApplyNode.to_sexp">
+<code class="descname">to_sexp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#ApplyNode.to_sexp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ApplyNode.to_sexp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.dsl.node.AtomNode">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.node.</code><code class="descname">AtomNode</code><span class="sig-paren">(</span><em>prod: tyrell.spec.production.Production</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.dsl.node.LeafNode" title="tyrell.dsl.node.LeafNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.dsl.node.LeafNode</span></code></a></p>
+<p>Leaf AST node that holds string data</p>
+<dl class="attribute">
+<dt id="tyrell.dsl.node.AtomNode.children">
+<code class="descname">children</code><a class="headerlink" href="#tyrell.dsl.node.AtomNode.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.AtomNode.data">
+<code class="descname">data</code><a class="headerlink" href="#tyrell.dsl.node.AtomNode.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.AtomNode.deep_eq">
+<code class="descname">deep_eq</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode.deep_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode.deep_eq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether this node is the same with <code class="docutils literal notranslate"><span class="pre">other</span></code>. This function performs deep comparison rather than just comparing the object identity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.AtomNode.deep_hash">
+<code class="descname">deep_hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode.deep_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode.deep_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function performs deep hash rather than just hashing the object identity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.AtomNode.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.AtomNode.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.AtomNode.to_sexp">
+<code class="descname">to_sexp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#AtomNode.to_sexp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.AtomNode.to_sexp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.dsl.node.LeafNode">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.node.</code><code class="descname">LeafNode</code><span class="sig-paren">(</span><em>prod: tyrell.spec.production.Production</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#LeafNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.LeafNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.dsl.node.Node" title="tyrell.dsl.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.dsl.node.Node</span></code></a></p>
+<p>Generic and abstract class for AST nodes that have no children</p>
+<dl class="method">
+<dt id="tyrell.dsl.node.LeafNode.is_apply">
+<code class="descname">is_apply</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#LeafNode.is_apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.LeafNode.is_apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.LeafNode.is_leaf">
+<code class="descname">is_leaf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#LeafNode.is_leaf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.LeafNode.is_leaf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.dsl.node.Node">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.node.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>prod: tyrell.spec.production.Production</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Generic and abstract AST Node</p>
+<dl class="attribute">
+<dt id="tyrell.dsl.node.Node.children">
+<code class="descname">children</code><a class="headerlink" href="#tyrell.dsl.node.Node.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.Node.is_apply">
+<code class="descname">is_apply</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node.is_apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node.is_apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.Node.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.Node.is_leaf">
+<code class="descname">is_leaf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node.is_leaf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node.is_leaf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.Node.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.Node.production">
+<code class="descname">production</code><a class="headerlink" href="#tyrell.dsl.node.Node.production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.Node.to_sexp">
+<code class="descname">to_sexp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#Node.to_sexp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.Node.to_sexp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.Node.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.dsl.node.Node.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.dsl.node.ParamNode">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.node.</code><code class="descname">ParamNode</code><span class="sig-paren">(</span><em>prod: tyrell.spec.production.Production</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.dsl.node.LeafNode" title="tyrell.dsl.node.LeafNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.dsl.node.LeafNode</span></code></a></p>
+<p>Leaf AST node that holds a param</p>
+<dl class="attribute">
+<dt id="tyrell.dsl.node.ParamNode.children">
+<code class="descname">children</code><a class="headerlink" href="#tyrell.dsl.node.ParamNode.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ParamNode.deep_eq">
+<code class="descname">deep_eq</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode.deep_eq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode.deep_eq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether this node is the same with <code class="docutils literal notranslate"><span class="pre">other</span></code>. This function performs deep comparison rather than just comparing the object identity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ParamNode.deep_hash">
+<code class="descname">deep_hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode.deep_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode.deep_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function performs deep hash rather than just hashing the object identity.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.dsl.node.ParamNode.index">
+<code class="descname">index</code><a class="headerlink" href="#tyrell.dsl.node.ParamNode.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ParamNode.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ParamNode.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.node.ParamNode.to_sexp">
+<code class="descname">to_sexp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/node.html#ParamNode.to_sexp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.node.ParamNode.to_sexp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl.parent_finder">
+<span id="tyrell-dsl-parent-finder-module"></span><h2>tyrell.dsl.parent_finder module<a class="headerlink" href="#module-tyrell.dsl.parent_finder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.dsl.parent_finder.ParentFinder">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.parent_finder.</code><code class="descname">ParentFinder</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/parent_finder.html#ParentFinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.parent_finder.ParentFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A utility class providing mapping between AST Node and its parent.</p>
+<dl class="method">
+<dt id="tyrell.dsl.parent_finder.ParentFinder.get_parent">
+<code class="descname">get_parent</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/dsl/parent_finder.html#ParentFinder.get_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.parent_finder.ParentFinder.get_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the parent of the node, or None if the parent cannot be found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.parent_finder.ParentFinder.get_parent_or_raise">
+<code class="descname">get_parent_or_raise</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/dsl/parent_finder.html#ParentFinder.get_parent_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.parent_finder.ParentFinder.get_parent_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the parent of the node, or raise <cite>KeyError</cite> if the parent cannot be found.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl.test_dsl">
+<span id="tyrell-dsl-test-dsl-module"></span><h2>tyrell.dsl.test_dsl module<a class="headerlink" href="#module-tyrell.dsl.test_dsl" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.dsl.test_dsl.TestDSL">
+<em class="property">class </em><code class="descclassname">tyrell.dsl.test_dsl.</code><code class="descname">TestDSL</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_builder_high_level_apis">
+<code class="descname">test_builder_high_level_apis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_builder_high_level_apis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_builder_high_level_apis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_builder_low_level_apis">
+<code class="descname">test_builder_low_level_apis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_builder_low_level_apis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_builder_low_level_apis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_iterator">
+<code class="descname">test_iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_iterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_iterator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_node">
+<code class="descname">test_node</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_node_indexer">
+<code class="descname">test_node_indexer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_node_indexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_node_indexer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.dsl.test_dsl.TestDSL.test_parent_finder">
+<code class="descname">test_parent_finder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/dsl/test_dsl.html#TestDSL.test_parent_finder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.dsl.test_dsl.TestDSL.test_parent_finder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.dsl">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tyrell.dsl" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tyrell Source Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tyrell.html">tyrell package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Tyrell Source Documentation</a><ul>
+  <li><a href="tyrell.html">tyrell package</a><ul>
+      <li>Previous: <a href="tyrell.decider.html" title="previous chapter">tyrell.decider package</a></li>
+      <li>Next: <a href="tyrell.enumerator.html" title="next chapter">tyrell.enumerator package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/tyrell.dsl.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

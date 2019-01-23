@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.decider.eval_expr &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tyrell.decider.eval_expr</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">..spec.expr</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..interpreter</span> <span class="k">import</span> <span class="n">Interpreter</span>
+<span class="kn">from</span> <span class="nn">..visitor</span> <span class="k">import</span> <span class="n">GenericVisitor</span>
+
+
+<div class="viewcode-block" id="ExprVisitor"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor">[docs]</a><span class="k">class</span> <span class="nc">ExprVisitor</span><span class="p">(</span><span class="n">GenericVisitor</span><span class="p">):</span>
+    <span class="n">_interp</span><span class="p">:</span> <span class="n">Interpreter</span>
+    <span class="n">_in_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+    <span class="n">_out_value</span><span class="p">:</span> <span class="n">Any</span>
+
+    <span class="n">_unary_dispatch_table</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">UnaryOperator</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">UnaryOperator</span><span class="o">.</span><span class="n">NOT</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">UnaryOperator</span><span class="o">.</span><span class="n">NEG</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span>
+    <span class="p">}</span>
+    <span class="n">_binary_dispatch_table</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">BinaryOperator</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">ADD</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">SUB</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">MUL</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+        <span class="c1"># FIXME: Semantics of the following two operators may diverge in Python and Z3</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">DIV</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">MOD</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">EQ</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">NE</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">LT</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">LE</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">GT</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">GE</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">AND</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">OR</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="ow">or</span> <span class="n">y</span><span class="p">,</span>
+        <span class="n">BinaryOperator</span><span class="o">.</span><span class="n">IMPLY</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">y</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interp</span><span class="p">:</span> <span class="n">Interpreter</span><span class="p">,</span> <span class="n">in_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">out_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp</span> <span class="o">=</span> <span class="n">interp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_in_values</span> <span class="o">=</span> <span class="n">in_values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_out_value</span> <span class="o">=</span> <span class="n">out_value</span>
+
+<div class="viewcode-block" id="ExprVisitor.visit_const_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_const_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_const_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">const_expr</span><span class="p">:</span> <span class="n">ConstExpr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">const_expr</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="ExprVisitor.visit_param_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_param_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_param_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_expr</span><span class="p">:</span> <span class="n">ParamExpr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">param_expr</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_out_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_values</span><span class="p">[</span><span class="n">param_expr</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ExprVisitor.visit_unary_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_unary_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_unary_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unary_expr</span><span class="p">:</span> <span class="n">UnaryExpr</span><span class="p">):</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">unary_expr</span><span class="o">.</span><span class="n">operand</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unary_dispatch_table</span><span class="p">[</span><span class="n">unary_expr</span><span class="o">.</span><span class="n">operator</span><span class="p">](</span><span class="n">arg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExprVisitor.visit_binary_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_binary_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_binary_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">binary_expr</span><span class="p">:</span> <span class="n">BinaryExpr</span><span class="p">):</span>
+        <span class="n">larg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">binary_expr</span><span class="o">.</span><span class="n">lhs</span><span class="p">)</span>
+        <span class="n">rarg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">binary_expr</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_dispatch_table</span><span class="p">[</span><span class="n">binary_expr</span><span class="o">.</span><span class="n">operator</span><span class="p">](</span><span class="n">larg</span><span class="p">,</span> <span class="n">rarg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExprVisitor.visit_cond_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_cond_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_cond_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond_expr</span><span class="p">:</span> <span class="n">CondExpr</span><span class="p">):</span>
+        <span class="n">cond_arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">cond_expr</span><span class="o">.</span><span class="n">condition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cond_arg</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">cond_expr</span><span class="o">.</span><span class="n">true_value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">cond_expr</span><span class="o">.</span><span class="n">false_value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExprVisitor.visit_property_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.ExprVisitor.visit_property_expr">[docs]</a>    <span class="k">def</span> <span class="nf">visit_property_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop_expr</span><span class="p">:</span> <span class="n">PropertyExpr</span><span class="p">):</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">prop_expr</span><span class="o">.</span><span class="n">operand</span><span class="p">)</span>
+        <span class="n">method_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_method_name</span><span class="p">(</span><span class="n">prop_expr</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_interp</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Cannot find the required apply method: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_apply_method_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;apply_&#39;</span> <span class="o">+</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="eval_expr"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.eval_expr.eval_expr">[docs]</a><span class="k">def</span> <span class="nf">eval_expr</span><span class="p">(</span><span class="n">interpreter</span><span class="p">:</span> <span class="n">Interpreter</span><span class="p">,</span> <span class="n">in_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">out_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="n">Expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ExprVisitor</span><span class="p">(</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">in_values</span><span class="p">,</span> <span class="n">out_value</span><span class="p">)</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

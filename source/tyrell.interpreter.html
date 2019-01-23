@@ -1,0 +1,324 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.interpreter package &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tyrell.spec package" href="tyrell.spec.html" />
+    <link rel="prev" title="tyrell.enumerator package" href="tyrell.enumerator.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tyrell-interpreter-package">
+<h1>tyrell.interpreter package<a class="headerlink" href="#tyrell-interpreter-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tyrell.interpreter.context">
+<span id="tyrell-interpreter-context-module"></span><h2>tyrell.interpreter.context module<a class="headerlink" href="#module-tyrell.interpreter.context" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.interpreter.context.Context">
+<em class="property">class </em><code class="descclassname">tyrell.interpreter.context.</code><code class="descname">Context</code><a class="reference internal" href="../_modules/tyrell/interpreter/context.html#Context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.context.Context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.interpreter.context.Context.evaluated">
+<code class="descname">evaluated</code><a class="headerlink" href="#tyrell.interpreter.context.Context.evaluated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.context.Context.finish">
+<code class="descname">finish</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/tyrell/interpreter/context.html#Context.finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.context.Context.finish" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.context.Context.observe">
+<code class="descname">observe</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/tyrell/interpreter/context.html#Context.observe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.context.Context.observe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.context.Context.observed">
+<code class="descname">observed</code><a class="headerlink" href="#tyrell.interpreter.context.Context.observed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.context.Context.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/interpreter/context.html#Context.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.context.Context.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.context.Context.pop_or_raise">
+<code class="descname">pop_or_raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.dsl.node.Node<a class="reference internal" href="../_modules/tyrell/interpreter/context.html#Context.pop_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.context.Context.pop_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.context.Context.stack">
+<code class="descname">stack</code><a class="headerlink" href="#tyrell.interpreter.context.Context.stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.interpreter.error">
+<span id="tyrell-interpreter-error-module"></span><h2>tyrell.interpreter.error module<a class="headerlink" href="#module-tyrell.interpreter.error" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="tyrell.interpreter.error.AssertionViolation">
+<em class="property">exception </em><code class="descclassname">tyrell.interpreter.error.</code><code class="descname">AssertionViolation</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node, index: int, reason: Callable[[Any], bool], captures: Iterable[int]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/error.html#AssertionViolation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.interpreter.error.InterpreterError" title="tyrell.interpreter.error.InterpreterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.error.InterpreterError</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.interpreter.error.AssertionViolation.arg">
+<code class="descname">arg</code><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation.arg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.error.AssertionViolation.captures">
+<code class="descname">captures</code><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation.captures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.error.AssertionViolation.index">
+<code class="descname">index</code><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.error.AssertionViolation.node">
+<code class="descname">node</code><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation.node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.interpreter.error.AssertionViolation.reason">
+<code class="descname">reason</code><a class="headerlink" href="#tyrell.interpreter.error.AssertionViolation.reason" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.interpreter.error.GeneralError">
+<em class="property">exception </em><code class="descclassname">tyrell.interpreter.error.</code><code class="descname">GeneralError</code><span class="sig-paren">(</span><em>msg: str = ''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/error.html#GeneralError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.error.GeneralError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.interpreter.error.InterpreterError" title="tyrell.interpreter.error.InterpreterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.error.InterpreterError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.interpreter.error.InterpreterError">
+<em class="property">exception </em><code class="descclassname">tyrell.interpreter.error.</code><code class="descname">InterpreterError</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/error.html#InterpreterError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.error.InterpreterError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.interpreter.interpreter">
+<span id="tyrell-interpreter-interpreter-module"></span><h2>tyrell.interpreter.interpreter module<a class="headerlink" href="#module-tyrell.interpreter.interpreter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.interpreter.interpreter.Interpreter">
+<em class="property">class </em><code class="descclassname">tyrell.interpreter.interpreter.</code><code class="descname">Interpreter</code><a class="reference internal" href="../_modules/tyrell/interpreter/interpreter.html#Interpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.interpreter.Interpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="method">
+<dt id="tyrell.interpreter.interpreter.Interpreter.assertArg">
+<code class="descname">assertArg</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node, args: List[Any], index: int, cond: Callable[[Any], bool], capture_indices: Iterable[int] = []</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/tyrell/interpreter/interpreter.html#Interpreter.assertArg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.interpreter.Interpreter.assertArg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the value of <cite>index</cite>-th argument against <cite>cond</cite>. If <cite>cond</cite> is not met, raise AssertionViolation.
+If the assertion refers to the value(s) of other arugments, the indices of those arguments should be passed to <cite>capture_indices</cite> as a list of integer. By default, this list is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.interpreter.Interpreter.eval">
+<code class="descname">eval</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node, inputs: List[Any]</em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/tyrell/interpreter/interpreter.html#Interpreter.eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.interpreter.Interpreter.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a DSL <cite>prog</cite> on input <cite>inputs</cite>. The output is returned.
+This is a covenient wrapper over <cite>eval_step</cite> that repeatedly invoke the generator until we get the final result.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.interpreter.post_order">
+<span id="tyrell-interpreter-post-order-module"></span><h2>tyrell.interpreter.post_order module<a class="headerlink" href="#module-tyrell.interpreter.post_order" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.interpreter.post_order.PostOrderInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.interpreter.post_order.</code><code class="descname">PostOrderInterpreter</code><a class="reference internal" href="../_modules/tyrell/interpreter/post_order.html#PostOrderInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.post_order.PostOrderInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.interpreter.interpreter.Interpreter" title="tyrell.interpreter.interpreter.Interpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.interpreter.Interpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.interpreter.post_order.PostOrderInterpreter.eval">
+<code class="descname">eval</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node, inputs: List[Any]</em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/tyrell/interpreter/post_order.html#PostOrderInterpreter.eval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.post_order.PostOrderInterpreter.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpret the Given AST in post-order. Assumes the existence of <cite>eval_XXX</cite> method where <cite>XXX</cite> is the name of a function defined in the DSL.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.interpreter.test_interpreter">
+<span id="tyrell-interpreter-test-interpreter-module"></span><h2>tyrell.interpreter.test_interpreter module<a class="headerlink" href="#module-tyrell.interpreter.test_interpreter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.interpreter.test_interpreter.</code><code class="descname">BoolInterpreter</code><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.post_order.PostOrderInterpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_BoolLit">
+<code class="descname">eval_BoolLit</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_BoolLit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_BoolLit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_and">
+<code class="descname">eval_and</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_and"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_and" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_assertTrue">
+<code class="descname">eval_assertTrue</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_assertTrue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_assertTrue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_const">
+<code class="descname">eval_const</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_const"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_const" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_not">
+<code class="descname">eval_not</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_not"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_not" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.BoolInterpreter.eval_or">
+<code class="descname">eval_or</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#BoolInterpreter.eval_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.BoolInterpreter.eval_or" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.interpreter.test_interpreter.</code><code class="descname">TestSimpleInterpreter</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_context">
+<code class="descname">test_context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter.test_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter0">
+<code class="descname">test_interpreter0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter.test_interpreter0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter1">
+<code class="descname">test_interpreter1</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter.test_interpreter1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter2">
+<code class="descname">test_interpreter2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/interpreter/test_interpreter.html#TestSimpleInterpreter.test_interpreter2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.interpreter.test_interpreter.TestSimpleInterpreter.test_interpreter2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.interpreter">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tyrell.interpreter" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tyrell Source Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tyrell.html">tyrell package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Tyrell Source Documentation</a><ul>
+  <li><a href="tyrell.html">tyrell package</a><ul>
+      <li>Previous: <a href="tyrell.enumerator.html" title="previous chapter">tyrell.enumerator package</a></li>
+      <li>Next: <a href="tyrell.spec.html" title="next chapter">tyrell.spec package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/tyrell.interpreter.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

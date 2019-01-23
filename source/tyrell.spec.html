@@ -1,0 +1,1604 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.spec package &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tyrell.synthesizer package" href="tyrell.synthesizer.html" />
+    <link rel="prev" title="tyrell.interpreter package" href="tyrell.interpreter.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tyrell-spec-package">
+<h1>tyrell.spec package<a class="headerlink" href="#tyrell-spec-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tyrell.spec.desugar">
+<span id="tyrell-spec-desugar-module"></span><h2>tyrell.spec.desugar module<a class="headerlink" href="#module-tyrell.spec.desugar" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="tyrell.spec.desugar.ParseTreeProcessingError">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.desugar.</code><code class="descname">ParseTreeProcessingError</code><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ParseTreeProcessingError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ParseTreeProcessingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.desugar.PredicateCollector">
+<em class="property">class </em><code class="descclassname">tyrell.spec.desugar.</code><code class="descname">PredicateCollector</code><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#PredicateCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.PredicateCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Visitor_Recursive" title="tyrell.spec.parser.Visitor_Recursive"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Visitor_Recursive</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.desugar.PredicateCollector.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.spec.spec.PredicateSpec<a class="reference internal" href="../_modules/tyrell/spec/desugar.html#PredicateCollector.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.PredicateCollector.collect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.PredicateCollector.pred_body">
+<code class="descname">pred_body</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#PredicateCollector.pred_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.PredicateCollector.pred_body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.desugar.ProductionCollecotr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.desugar.</code><code class="descname">ProductionCollecotr</code><span class="sig-paren">(</span><em>type_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProductionCollecotr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProductionCollecotr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Visitor_Recursive" title="tyrell.spec.parser.Visitor_Recursive"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Visitor_Recursive</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.desugar.ProductionCollecotr.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.spec.spec.ProductionSpec<a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProductionCollecotr.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProductionCollecotr.collect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.ProductionCollecotr.func_decl">
+<code class="descname">func_decl</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProductionCollecotr.func_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProductionCollecotr.func_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.desugar.ProgramCollector">
+<em class="property">class </em><code class="descclassname">tyrell.spec.desugar.</code><code class="descname">ProgramCollector</code><span class="sig-paren">(</span><em>type_spec</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProgramCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProgramCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Visitor_Recursive" title="tyrell.spec.parser.Visitor_Recursive"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Visitor_Recursive</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.desugar.ProgramCollector.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.spec.spec.ProgramSpec<a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProgramCollector.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProgramCollector.collect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.ProgramCollector.program_decl">
+<code class="descname">program_decl</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#ProgramCollector.program_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.ProgramCollector.program_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.desugar.TypeCollector">
+<em class="property">class </em><code class="descclassname">tyrell.spec.desugar.</code><code class="descname">TypeCollector</code><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#TypeCollector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.TypeCollector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Visitor_Recursive" title="tyrell.spec.parser.Visitor_Recursive"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Visitor_Recursive</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.desugar.TypeCollector.collect">
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.spec.spec.TypeSpec<a class="reference internal" href="../_modules/tyrell/spec/desugar.html#TypeCollector.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.TypeCollector.collect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.TypeCollector.enum_decl">
+<code class="descname">enum_decl</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#TypeCollector.enum_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.TypeCollector.enum_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.TypeCollector.enum_set_decl">
+<code class="descname">enum_set_decl</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#TypeCollector.enum_set_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.TypeCollector.enum_set_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.desugar.TypeCollector.value_decl">
+<code class="descname">value_decl</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#TypeCollector.value_decl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.TypeCollector.value_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.desugar.desugar">
+<code class="descclassname">tyrell.spec.desugar.</code><code class="descname">desugar</code><span class="sig-paren">(</span><em>parse_tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/desugar.html#desugar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.desugar.desugar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.do_parse">
+<span id="tyrell-spec-do-parse-module"></span><h2>tyrell.spec.do_parse module<a class="headerlink" href="#module-tyrell.spec.do_parse" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tyrell.spec.do_parse.parse">
+<code class="descclassname">tyrell.spec.do_parse.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/do_parse.html#parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.do_parse.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Tyrell spec from an input string.
+May raise either <code class="docutils literal notranslate"><span class="pre">ParseError</span></code> or <code class="docutils literal notranslate"><span class="pre">ParseTreeProcessingError</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.do_parse.parse_file">
+<code class="descclassname">tyrell.spec.do_parse.</code><code class="descname">parse_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/do_parse.html#parse_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.do_parse.parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse Tyrell spec from an input file path.
+May raise either <code class="docutils literal notranslate"><span class="pre">ParseError</span></code> or <code class="docutils literal notranslate"><span class="pre">ParseTreeProcessingError</span></code>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.expr">
+<span id="tyrell-spec-expr-module"></span><h2>tyrell.spec.expr module<a class="headerlink" href="#module-tyrell.spec.expr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.expr.BinaryExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">BinaryExpr</code><span class="sig-paren">(</span><em>operator: tyrell.spec.expr.BinaryOperator</em>, <em>lhs: tyrell.spec.expr.Expr</em>, <em>rhs: tyrell.spec.expr.Expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#BinaryExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryExpr.lhs">
+<code class="descname">lhs</code><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr.lhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryExpr.operator">
+<code class="descname">operator</code><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr.operator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryExpr.rhs">
+<code class="descname">rhs</code><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr.rhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.BinaryExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.BinaryOperator">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">BinaryOperator</code><a class="reference internal" href="../_modules/tyrell/spec/expr.html#BinaryOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.ADD">
+<code class="descname">ADD</code><em class="property"> = '+'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.ADD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.AND">
+<code class="descname">AND</code><em class="property"> = '&amp;&amp;'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.AND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.DIV">
+<code class="descname">DIV</code><em class="property"> = '/'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.DIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.EQ">
+<code class="descname">EQ</code><em class="property"> = '=='</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.EQ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.GE">
+<code class="descname">GE</code><em class="property"> = '&gt;='</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.GE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.GT">
+<code class="descname">GT</code><em class="property"> = '&gt;'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.GT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.IMPLY">
+<code class="descname">IMPLY</code><em class="property"> = '==&gt;'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.IMPLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.LE">
+<code class="descname">LE</code><em class="property"> = '&lt;='</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.LE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.LT">
+<code class="descname">LT</code><em class="property"> = '&lt;'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.LT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.MOD">
+<code class="descname">MOD</code><em class="property"> = '%'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.MOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.MUL">
+<code class="descname">MUL</code><em class="property"> = '*'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.MUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.NE">
+<code class="descname">NE</code><em class="property"> = '!='</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.NE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.OR">
+<code class="descname">OR</code><em class="property"> = '||'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.OR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.BinaryOperator.SUB">
+<code class="descname">SUB</code><em class="property"> = '-'</em><a class="headerlink" href="#tyrell.spec.expr.BinaryOperator.SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.CondExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">CondExpr</code><span class="sig-paren">(</span><em>cond: tyrell.spec.expr.Expr</em>, <em>true_val: tyrell.spec.expr.Expr</em>, <em>false_val: tyrell.spec.expr.Expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#CondExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.CondExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.CondExpr.condition">
+<code class="descname">condition</code><a class="headerlink" href="#tyrell.spec.expr.CondExpr.condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.CondExpr.false_value">
+<code class="descname">false_value</code><a class="headerlink" href="#tyrell.spec.expr.CondExpr.false_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.CondExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.CondExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.CondExpr.true_value">
+<code class="descname">true_value</code><a class="headerlink" href="#tyrell.spec.expr.CondExpr.true_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.CondExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.CondExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.ConstExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">ConstExpr</code><span class="sig-paren">(</span><em>value: Union[bool, int]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#ConstExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.ConstExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ConstExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.ConstExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ConstExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.ConstExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ConstExpr.value">
+<code class="descname">value</code><a class="headerlink" href="#tyrell.spec.expr.ConstExpr.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.Expr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">Expr</code><a class="reference internal" href="../_modules/tyrell/spec/expr.html#Expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.Expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.Expr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.Expr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.Expr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.Expr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.ExprType">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">ExprType</code><a class="reference internal" href="../_modules/tyrell/spec/expr.html#ExprType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.ExprType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ExprType.BOOL">
+<code class="descname">BOOL</code><em class="property"> = 'bool'</em><a class="headerlink" href="#tyrell.spec.expr.ExprType.BOOL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ExprType.INT">
+<code class="descname">INT</code><em class="property"> = 'int'</em><a class="headerlink" href="#tyrell.spec.expr.ExprType.INT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ExprType.VALUE">
+<code class="descname">VALUE</code><em class="property"> = 'value'</em><a class="headerlink" href="#tyrell.spec.expr.ExprType.VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.ParamExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">ParamExpr</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#ParamExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.ParamExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ParamExpr.index">
+<code class="descname">index</code><a class="headerlink" href="#tyrell.spec.expr.ParamExpr.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ParamExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.ParamExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.ParamExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.ParamExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.PropertyExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">PropertyExpr</code><span class="sig-paren">(</span><em>name: str</em>, <em>type: tyrell.spec.expr.ExprType</em>, <em>operand: tyrell.spec.expr.Expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#PropertyExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.PropertyExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.PropertyExpr.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.expr.PropertyExpr.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.PropertyExpr.operand">
+<code class="descname">operand</code><a class="headerlink" href="#tyrell.spec.expr.PropertyExpr.operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.PropertyExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.PropertyExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.PropertyExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.PropertyExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.UnaryExpr">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">UnaryExpr</code><span class="sig-paren">(</span><em>operator: tyrell.spec.expr.UnaryOperator</em>, <em>operand: tyrell.spec.expr.Expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#UnaryExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.UnaryExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.expr.Expr" title="tyrell.spec.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.expr.Expr</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryExpr.operand">
+<code class="descname">operand</code><a class="headerlink" href="#tyrell.spec.expr.UnaryExpr.operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryExpr.operands">
+<code class="descname">operands</code><a class="headerlink" href="#tyrell.spec.expr.UnaryExpr.operands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryExpr.operator">
+<code class="descname">operator</code><a class="headerlink" href="#tyrell.spec.expr.UnaryExpr.operator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryExpr.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.expr.UnaryExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.expr.UnaryOperator">
+<em class="property">class </em><code class="descclassname">tyrell.spec.expr.</code><code class="descname">UnaryOperator</code><a class="reference internal" href="../_modules/tyrell/spec/expr.html#UnaryOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.UnaryOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryOperator.NEG">
+<code class="descname">NEG</code><em class="property"> = '-'</em><a class="headerlink" href="#tyrell.spec.expr.UnaryOperator.NEG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.expr.UnaryOperator.NOT">
+<code class="descname">NOT</code><em class="property"> = '!'</em><a class="headerlink" href="#tyrell.spec.expr.UnaryOperator.NOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.expr.binary_param_type">
+<code class="descclassname">tyrell.spec.expr.</code><code class="descname">binary_param_type</code><span class="sig-paren">(</span><em>op: tyrell.spec.expr.BinaryOperator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#binary_param_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.binary_param_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.expr.binary_return_type">
+<code class="descclassname">tyrell.spec.expr.</code><code class="descname">binary_return_type</code><span class="sig-paren">(</span><em>op: tyrell.spec.expr.BinaryOperator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#binary_return_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.binary_return_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.expr.unary_param_type">
+<code class="descclassname">tyrell.spec.expr.</code><code class="descname">unary_param_type</code><span class="sig-paren">(</span><em>op: tyrell.spec.expr.UnaryOperator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#unary_param_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.unary_param_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.expr.unary_return_type">
+<code class="descclassname">tyrell.spec.expr.</code><code class="descname">unary_return_type</code><span class="sig-paren">(</span><em>op: tyrell.spec.expr.UnaryOperator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/expr.html#unary_return_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.expr.unary_return_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.parser">
+<span id="tyrell-spec-parser-module"></span><h2>tyrell.spec.parser module<a class="headerlink" href="#module-tyrell.spec.parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.parser.Callback">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Callback</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ChildFilter">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ChildFilter</code><span class="sig-paren">(</span><em>to_include</em>, <em>node_builder</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ChildFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ChildFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ChildFilterLALR">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ChildFilterLALR</code><span class="sig-paren">(</span><em>to_include</em>, <em>node_builder</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ChildFilterLALR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ChildFilterLALR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.ChildFilter" title="tyrell.spec.parser.ChildFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.ChildFilter</span></code></a></p>
+<p>Optimized childfilter for LALR (assumes no duplication in parse tree, so it’s safe to change it)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ContextualLexer">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ContextualLexer</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ContextualLexer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ContextualLexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.ContextualLexer.lex">
+<code class="descname">lex</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ContextualLexer.lex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ContextualLexer.lex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.ContextualLexer.set_parser_state">
+<code class="descname">set_parser_state</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ContextualLexer.set_parser_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ContextualLexer.set_parser_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.Discard">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Discard</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Discard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Discard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ExpandSingleChild">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ExpandSingleChild</code><span class="sig-paren">(</span><em>node_builder</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ExpandSingleChild"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ExpandSingleChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.GrammarError">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">GrammarError</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#GrammarError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.GrammarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.LarkError" title="tyrell.spec.parser.LarkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.LarkError</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Indenter">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Indenter</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Indenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Indenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Indenter.always_accept">
+<code class="descname">always_accept</code><a class="headerlink" href="#tyrell.spec.parser.Indenter.always_accept" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.Indenter.handle_NL">
+<code class="descname">handle_NL</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Indenter.handle_NL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Indenter.handle_NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.Indenter.process">
+<code class="descname">process</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Indenter.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Indenter.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.InlineTransformer">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">InlineTransformer</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#InlineTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.InlineTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Transformer" title="tyrell.spec.parser.Transformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Transformer</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Interpreter">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Interpreter</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Interpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Interpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Top-down visitor, recursive</p>
+<p>Visits the tree, starting with the root and finally the leaves (top-down)
+Calls its methods (provided by user via inheritance) according to tree.data</p>
+<p>Unlike Transformer and Visitor, the Interpreter doesn’t automatically visit its sub-branches.
+The user has to explicitly call visit_children, or use the &#64;visit_children_decor</p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Interpreter.visit">
+<code class="descname">visit</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Interpreter.visit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Interpreter.visit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.Interpreter.visit_children">
+<code class="descname">visit_children</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Interpreter.visit_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Interpreter.visit_children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.LarkError">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">LarkError</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#LarkError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.LarkError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Lark_StandAlone">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Lark_StandAlone</code><span class="sig-paren">(</span><em>transformer=None</em>, <em>postlex=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Lark_StandAlone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Lark_StandAlone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Lark_StandAlone.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Lark_StandAlone.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Lark_StandAlone.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.LexError">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">LexError</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#LexError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.LexError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.LarkError" title="tyrell.spec.parser.LarkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.LarkError</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.LexerRegexps">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">LexerRegexps</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#LexerRegexps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.LexerRegexps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.LineCounter">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">LineCounter</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#LineCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.LineCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.LineCounter.feed">
+<code class="descname">feed</code><span class="sig-paren">(</span><em>token</em>, <em>test_newline=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#LineCounter.feed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.LineCounter.feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Consume a token and calculate the new line &amp; column.</p>
+<p>As an optional optimization, set test_newline=False is token doesn’t contain a newline.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Meta">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Meta</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.NonTerminal">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">NonTerminal</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#NonTerminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.NonTerminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Symbol" title="tyrell.spec.parser.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Symbol</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.NonTerminal.is_term">
+<code class="descname">is_term</code><em class="property"> = False</em><a class="headerlink" href="#tyrell.spec.parser.NonTerminal.is_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.ParseError">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ParseError</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ParseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ParseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.LarkError" title="tyrell.spec.parser.LarkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.LarkError</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ParseTable">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ParseTable</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ParseTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ParseTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.ParseTreeBuilder">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">ParseTreeBuilder</code><span class="sig-paren">(</span><em>rules</em>, <em>tree_class</em>, <em>propagate_positions=False</em>, <em>keep_all_tokens=False</em>, <em>ambiguous=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ParseTreeBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ParseTreeBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.ParseTreeBuilder.create_callback">
+<code class="descname">create_callback</code><span class="sig-paren">(</span><em>transformer=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ParseTreeBuilder.create_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ParseTreeBuilder.create_callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.PropagatePositions">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">PropagatePositions</code><span class="sig-paren">(</span><em>node_builder</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#PropagatePositions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.PropagatePositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Rule">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Rule</code><span class="sig-paren">(</span><em>origin</em>, <em>expansion</em>, <em>alias=None</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Rule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>origin : a symbol
+expansion : a list of symbols</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.RuleOptions">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">RuleOptions</code><span class="sig-paren">(</span><em>keep_all_tokens=False</em>, <em>expand1=False</em>, <em>priority=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#RuleOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.RuleOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Symbol">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Symbol</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Symbol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Symbol.fullrepr">
+<code class="descname">fullrepr</code><a class="headerlink" href="#tyrell.spec.parser.Symbol.fullrepr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Symbol.is_term">
+<code class="descname">is_term</code><em class="property"> = NotImplemented</em><a class="headerlink" href="#tyrell.spec.parser.Symbol.is_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Terminal">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Terminal</code><span class="sig-paren">(</span><em>name</em>, <em>filter_out=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Terminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Symbol" title="tyrell.spec.parser.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Symbol</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Terminal.fullrepr">
+<code class="descname">fullrepr</code><a class="headerlink" href="#tyrell.spec.parser.Terminal.fullrepr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Terminal.is_term">
+<code class="descname">is_term</code><em class="property"> = True</em><a class="headerlink" href="#tyrell.spec.parser.Terminal.is_term" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Token">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Token</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.column">
+<code class="descname">column</code><a class="headerlink" href="#tyrell.spec.parser.Token.column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.end_column">
+<code class="descname">end_column</code><a class="headerlink" href="#tyrell.spec.parser.Token.end_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.end_line">
+<code class="descname">end_line</code><a class="headerlink" href="#tyrell.spec.parser.Token.end_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.line">
+<code class="descname">line</code><a class="headerlink" href="#tyrell.spec.parser.Token.line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="tyrell.spec.parser.Token.new_borrow_pos">
+<em class="property">classmethod </em><code class="descname">new_borrow_pos</code><span class="sig-paren">(</span><em>type_</em>, <em>value</em>, <em>borrow_t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Token.new_borrow_pos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Token.new_borrow_pos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.pos_in_stream">
+<code class="descname">pos_in_stream</code><a class="headerlink" href="#tyrell.spec.parser.Token.pos_in_stream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.type">
+<code class="descname">type</code><a class="headerlink" href="#tyrell.spec.parser.Token.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Token.value">
+<code class="descname">value</code><a class="headerlink" href="#tyrell.spec.parser.Token.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Transformer">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Transformer</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Transformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Transformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Visits the tree recursively, starting with the leaves and finally the root (bottom-up)</p>
+<p>Calls its methods (provided by user via inheritance) according to tree.data
+The returned value replaces the old one in the structure.</p>
+<p>Can be used to implement map or reduce.</p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Transformer.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Transformer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Transformer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.TransformerChain">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">TransformerChain</code><span class="sig-paren">(</span><em>*transformers</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#TransformerChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.TransformerChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.TransformerChain.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#TransformerChain.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.TransformerChain.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Transformer_InPlace">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Transformer_InPlace</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Transformer_InPlace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Transformer_InPlace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Transformer" title="tyrell.spec.parser.Transformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Transformer</span></code></a></p>
+<p>Non-recursive. Changes the tree in-place instead of returning new instances</p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Transformer_InPlace.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Transformer_InPlace.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Transformer_InPlace.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Transformer_InPlaceRecursive">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Transformer_InPlaceRecursive</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Transformer_InPlaceRecursive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Transformer_InPlaceRecursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.Transformer" title="tyrell.spec.parser.Transformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.Transformer</span></code></a></p>
+<p>Recursive. Changes the tree in-place instead of returning new instances</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Tree">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Tree</code><span class="sig-paren">(</span><em>data</em>, <em>children</em>, <em>meta=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.parser.Tree.meta">
+<code class="descname">meta</code><a class="headerlink" href="#tyrell.spec.parser.Tree.meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.Tree.pretty">
+<code class="descname">pretty</code><span class="sig-paren">(</span><em>indent_str='  '</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Tree.pretty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Tree.pretty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.UnexpectedCharacters">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">UnexpectedCharacters</code><span class="sig-paren">(</span><em>seq</em>, <em>lex_pos</em>, <em>line</em>, <em>column</em>, <em>allowed=None</em>, <em>considered_tokens=None</em>, <em>state=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnexpectedCharacters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnexpectedCharacters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.LexError" title="tyrell.spec.parser.LexError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.LexError</span></code></a>, <a class="reference internal" href="#tyrell.spec.parser.UnexpectedInput" title="tyrell.spec.parser.UnexpectedInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.UnexpectedInput</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.UnexpectedInput">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">UnexpectedInput</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnexpectedInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnexpectedInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.LarkError" title="tyrell.spec.parser.LarkError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.LarkError</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.parser.UnexpectedInput.get_context">
+<code class="descname">get_context</code><span class="sig-paren">(</span><em>text</em>, <em>span=40</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnexpectedInput.get_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnexpectedInput.get_context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.parser.UnexpectedInput.match_examples">
+<code class="descname">match_examples</code><span class="sig-paren">(</span><em>parse_fn</em>, <em>examples</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnexpectedInput.match_examples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnexpectedInput.match_examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a parser instance and a dictionary mapping some label with
+some malformed syntax examples, it’ll return the label for the
+example that bests matches the current error.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.parser.UnexpectedInput.pos_in_stream">
+<code class="descname">pos_in_stream</code><em class="property"> = None</em><a class="headerlink" href="#tyrell.spec.parser.UnexpectedInput.pos_in_stream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="tyrell.spec.parser.UnexpectedToken">
+<em class="property">exception </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">UnexpectedToken</code><span class="sig-paren">(</span><em>token</em>, <em>expected</em>, <em>considered_rules=None</em>, <em>state=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnexpectedToken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnexpectedToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.ParseError" title="tyrell.spec.parser.ParseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.ParseError</span></code></a>, <a class="reference internal" href="#tyrell.spec.parser.UnexpectedInput" title="tyrell.spec.parser.UnexpectedInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.UnexpectedInput</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.UnlessCallback">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">UnlessCallback</code><span class="sig-paren">(</span><em>mres</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#UnlessCallback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.UnlessCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Visitor">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Visitor</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Visitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Visitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.VisitorBase" title="tyrell.spec.parser.VisitorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.VisitorBase</span></code></a></p>
+<p>Bottom-up visitor, non-recursive</p>
+<p>Visits the tree, starting with the leaves and finally the root (bottom-up)
+Calls its methods (provided by user via inheritance) according to tree.data</p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Visitor.visit">
+<code class="descname">visit</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Visitor.visit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Visitor.visit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.VisitorBase">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">VisitorBase</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#VisitorBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.VisitorBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.parser.Visitor_Recursive">
+<em class="property">class </em><code class="descclassname">tyrell.spec.parser.</code><code class="descname">Visitor_Recursive</code><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Visitor_Recursive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Visitor_Recursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.parser.VisitorBase" title="tyrell.spec.parser.VisitorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.parser.VisitorBase</span></code></a></p>
+<p>Bottom-up visitor, recursive</p>
+<p>Visits the tree, starting with the leaves and finally the root (bottom-up)
+Calls its methods (provided by user via inheritance) according to tree.data</p>
+<dl class="method">
+<dt id="tyrell.spec.parser.Visitor_Recursive.visit">
+<code class="descname">visit</code><span class="sig-paren">(</span><em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#Visitor_Recursive.visit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.Visitor_Recursive.visit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.inline_args">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">inline_args</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#inline_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.inline_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.lex">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">lex</code><span class="sig-paren">(</span><em>stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#lex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.lex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.maybe_create_child_filter">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">maybe_create_child_filter</code><span class="sig-paren">(</span><em>expansion</em>, <em>keep_all_tokens</em>, <em>ambiguous</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#maybe_create_child_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.maybe_create_child_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.ptb_inline_args">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">ptb_inline_args</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#ptb_inline_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.ptb_inline_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.smart_decorator">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">smart_decorator</code><span class="sig-paren">(</span><em>f</em>, <em>create_decorator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#smart_decorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.smart_decorator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.v_args">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">v_args</code><span class="sig-paren">(</span><em>inline=False</em>, <em>meta=False</em>, <em>tree=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#v_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.v_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenience decorator factory, for modifying the behavior of user-supplied visitor methods</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.spec.parser.visit_children_decor">
+<code class="descclassname">tyrell.spec.parser.</code><code class="descname">visit_children_decor</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/parser.html#visit_children_decor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.parser.visit_children_decor" title="Permalink to this definition">¶</a></dt>
+<dd><p>See Interpreter</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.predicate">
+<span id="tyrell-spec-predicate-module"></span><h2>tyrell.spec.predicate module<a class="headerlink" href="#module-tyrell.spec.predicate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.predicate.Predicate">
+<em class="property">class </em><code class="descclassname">tyrell.spec.predicate.</code><code class="descname">Predicate</code><span class="sig-paren">(</span><em>name: str</em>, <em>args: List[Any] = []</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/predicate.html#Predicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.predicate.Predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.spec.predicate.Predicate.args">
+<code class="descname">args</code><a class="headerlink" href="#tyrell.spec.predicate.Predicate.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.predicate.Predicate.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.predicate.Predicate.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.predicate.Predicate.num_args">
+<code class="descname">num_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/predicate.html#Predicate.num_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.predicate.Predicate.num_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.production">
+<span id="tyrell-spec-production-module"></span><h2>tyrell.spec.production module<a class="headerlink" href="#module-tyrell.spec.production" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.production.EnumProduction">
+<em class="property">class </em><code class="descclassname">tyrell.spec.production.</code><code class="descname">EnumProduction</code><span class="sig-paren">(</span><em>id: int</em>, <em>lhs: tyrell.spec.type.EnumType</em>, <em>choice: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/production.html#EnumProduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.EnumProduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.production.Production" title="tyrell.spec.production.Production"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.production.Production</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.production.EnumProduction.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#EnumProduction.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.EnumProduction.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.EnumProduction.is_function">
+<code class="descname">is_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#EnumProduction.is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.EnumProduction.is_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.EnumProduction.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#EnumProduction.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.EnumProduction.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.EnumProduction.rhs">
+<code class="descname">rhs</code><a class="headerlink" href="#tyrell.spec.production.EnumProduction.rhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.production.FunctionProduction">
+<em class="property">class </em><code class="descclassname">tyrell.spec.production.</code><code class="descname">FunctionProduction</code><span class="sig-paren">(</span><em>id: int, name: str, lhs: tyrell.spec.type.ValueType, rhs: List[tyrell.spec.type.Type], constraints: List[tyrell.spec.expr.Expr] = []</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/production.html#FunctionProduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.FunctionProduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.production.Production" title="tyrell.spec.production.Production"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.production.Production</span></code></a></p>
+<dl class="attribute">
+<dt id="tyrell.spec.production.FunctionProduction.constraints">
+<code class="descname">constraints</code><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.constraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.FunctionProduction.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#FunctionProduction.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.FunctionProduction.is_function">
+<code class="descname">is_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#FunctionProduction.is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.is_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.FunctionProduction.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#FunctionProduction.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.FunctionProduction.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.FunctionProduction.rhs">
+<code class="descname">rhs</code><a class="headerlink" href="#tyrell.spec.production.FunctionProduction.rhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.production.ParamProduction">
+<em class="property">class </em><code class="descclassname">tyrell.spec.production.</code><code class="descname">ParamProduction</code><span class="sig-paren">(</span><em>id: int</em>, <em>lhs: tyrell.spec.type.ValueType</em>, <em>param_id: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/production.html#ParamProduction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.ParamProduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.production.Production" title="tyrell.spec.production.Production"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.production.Production</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.production.ParamProduction.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#ParamProduction.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.ParamProduction.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.ParamProduction.is_function">
+<code class="descname">is_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#ParamProduction.is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.ParamProduction.is_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.ParamProduction.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#ParamProduction.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.ParamProduction.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.ParamProduction.rhs">
+<code class="descname">rhs</code><a class="headerlink" href="#tyrell.spec.production.ParamProduction.rhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.production.Production">
+<em class="property">class </em><code class="descclassname">tyrell.spec.production.</code><code class="descname">Production</code><span class="sig-paren">(</span><em>id: int</em>, <em>lhs: tyrell.spec.type.Type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/production.html#Production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.Production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class represent a CFG production rule for our DSL.
+Each production rule is uniquely identified by its ID in a given spec.</p>
+<dl class="attribute">
+<dt id="tyrell.spec.production.Production.id">
+<code class="descname">id</code><a class="headerlink" href="#tyrell.spec.production.Production.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.Production.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#Production.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.Production.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.Production.is_function">
+<code class="descname">is_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#Production.is_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.Production.is_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.production.Production.is_param">
+<code class="descname">is_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/production.html#Production.is_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.production.Production.is_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.Production.lhs">
+<code class="descname">lhs</code><a class="headerlink" href="#tyrell.spec.production.Production.lhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.production.Production.rhs">
+<code class="descname">rhs</code><a class="headerlink" href="#tyrell.spec.production.Production.rhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.spec">
+<span id="tyrell-spec-spec-module"></span><h2>tyrell.spec.spec module<a class="headerlink" href="#module-tyrell.spec.spec" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.spec.PredicateSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.spec.</code><code class="descname">PredicateSpec</code><a class="reference internal" href="../_modules/tyrell/spec/spec.html#PredicateSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.PredicateSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.spec.PredicateSpec.add_predicate">
+<code class="descname">add_predicate</code><span class="sig-paren">(</span><em>name: str</em>, <em>args: List[Any] = []</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.predicate.Predicate<a class="reference internal" href="../_modules/tyrell/spec/spec.html#PredicateSpec.add_predicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.PredicateSpec.add_predicate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.PredicateSpec.get_predicates_with_name">
+<code class="descname">get_predicates_with_name</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.predicate.Predicate]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#PredicateSpec.get_predicates_with_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.PredicateSpec.get_predicates_with_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.PredicateSpec.num_predicates">
+<code class="descname">num_predicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#PredicateSpec.num_predicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.PredicateSpec.num_predicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of predicates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.PredicateSpec.predicates">
+<code class="descname">predicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterable[tyrell.spec.predicate.Predicate]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#PredicateSpec.predicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.PredicateSpec.predicates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.spec.ProductionSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.spec.</code><code class="descname">ProductionSpec</code><a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.add_enum_production">
+<code class="descname">add_enum_production</code><span class="sig-paren">(</span><em>lhs: tyrell.spec.type.EnumType</em>, <em>choice: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.EnumProduction<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.add_enum_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.add_enum_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new enum production. Return the created production.
+Raise <cite>ValueError</cite> if <cite>choice</cite> is out of bound.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.add_func_production">
+<code class="descname">add_func_production</code><span class="sig-paren">(</span><em>name: str, lhs: tyrell.spec.type.ValueType, rhs: List[tyrell.spec.type.Type], constraints: List[tyrell.spec.expr.Expr] = []</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.FunctionProduction<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.add_func_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.add_func_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new function production with the given <cite>name</cite>, <cite>lhs</cite>, and <cite>rhs</cite>. Return the created production.
+Raise <cite>ValueError</cite> if a production with the same <cite>name</cite> has already been created</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.add_param_production">
+<code class="descname">add_param_production</code><span class="sig-paren">(</span><em>lhs: tyrell.spec.type.ValueType</em>, <em>index: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.ParamProduction<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.add_param_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.add_param_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new param production. Return the created production.
+Raise <cite>ValueError</cite> if a production with the same <cite>index</cite> has already been created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_enum_production">
+<code class="descname">get_enum_production</code><span class="sig-paren">(</span><em>ty: tyrell.spec.type.EnumType</em>, <em>value: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_enum_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_enum_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the enum production whose type is <cite>type</cite> and value is <cite>value</cite>.
+If no production is found, return <cite>None</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_enum_production_or_raise">
+<code class="descname">get_enum_production_or_raise</code><span class="sig-paren">(</span><em>ty: tyrell.spec.type.EnumType</em>, <em>value: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_enum_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_enum_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the enum production whose type is <cite>type</cite> and value is <cite>value</cite>.
+If no production is found, raise <cite>KeyError</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_function_production">
+<code class="descname">get_function_production</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_function_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_function_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the function production whose name is <cite>name</cite>.
+If no production is found, return <cite>None</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_function_production_or_raise">
+<code class="descname">get_function_production_or_raise</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_function_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_function_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the function production whose name is <cite>name</cite>.
+If no production is found, raise <cite>KeyError</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_function_productions">
+<code class="descname">get_function_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_function_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_function_productions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all function productions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_param_production">
+<code class="descname">get_param_production</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_param_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_param_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the param production whose index is <cite>index</cite>.
+If no production is found, return <cite>None</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_param_production_or_raise">
+<code class="descname">get_param_production_or_raise</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_param_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_param_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the function production whose name is <cite>name</cite>.
+If no production is found, raise <cite>KeyError</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_param_productions">
+<code class="descname">get_param_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_param_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_param_productions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all param productions
+If no production is found, return an empty list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_production">
+<code class="descname">get_production</code><span class="sig-paren">(</span><em>id: int</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the production associated with <cite>id</cite>.
+If the id does not correspond to any production, return <cite>None</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_production_or_raise">
+<code class="descname">get_production_or_raise</code><span class="sig-paren">(</span><em>id: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the production associated with <cite>id</cite>.
+If the id does not correspond to any production, return <cite>KeyError</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.get_productions_with_lhs">
+<code class="descname">get_productions_with_lhs</code><span class="sig-paren">(</span><em>ty: Union[str, tyrell.spec.type.Type]</em><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.get_productions_with_lhs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.get_productions_with_lhs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the productions whose LHS is <cite>ty</cite>, where <cite>ty</cite> can be a Type or a string representing the name of the type
+If no production is found, or <cite>ty</cite> is not a string or a Type, return an empty list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.num_productions">
+<code class="descname">num_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.num_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.num_productions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of defined productions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProductionSpec.productions">
+<code class="descname">productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterable[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProductionSpec.productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProductionSpec.productions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all productions</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.spec.ProgramSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.spec.</code><code class="descname">ProgramSpec</code><span class="sig-paren">(</span><em>name: str, in_types: List[tyrell.spec.type.Type], out_type: tyrell.spec.type.Type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProgramSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="staticmethod">
+<dt id="tyrell.spec.spec.ProgramSpec.check_value_type">
+<em class="property">static </em><code class="descname">check_value_type</code><span class="sig-paren">(</span><em>ty</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProgramSpec.check_value_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec.check_value_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.ProgramSpec.input">
+<code class="descname">input</code><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.ProgramSpec.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.ProgramSpec.num_input">
+<code class="descname">num_input</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#ProgramSpec.num_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec.num_input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.ProgramSpec.output">
+<code class="descname">output</code><a class="headerlink" href="#tyrell.spec.spec.ProgramSpec.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.spec.TypeSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.spec.</code><code class="descname">TypeSpec</code><a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.spec.TypeSpec.define_type">
+<code class="descname">define_type</code><span class="sig-paren">(</span><em>ty: tyrell.spec.type.Type</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.type.Type<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec.define_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec.define_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the type <cite>ty</cite> to this spec. Return <cite>ty</cite> itself.
+Raise <cite>ValueError</cite> if another type with duplicated name is found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TypeSpec.get_type">
+<code class="descname">get_type</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.type.Type]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec.get_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec.get_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type associated with <cite>name</cite>, if it is defined.
+If the type has not been defined, return <cite>None</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TypeSpec.get_type_or_raise">
+<code class="descname">get_type_or_raise</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.type.Type<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec.get_type_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec.get_type_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the type associated with <cite>name</cite>, if it is defined.
+If the type has not been defined, raise <cite>KeyError</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TypeSpec.num_types">
+<code class="descname">num_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec.num_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec.num_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of defined types</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TypeSpec.types">
+<code class="descname">types</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterable[tyrell.spec.type.Type]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TypeSpec.types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TypeSpec.types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator for all defined types</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.spec.TyrellSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.spec.</code><code class="descname">TyrellSpec</code><span class="sig-paren">(</span><em>type_spec</em>, <em>prog_spec</em>, <em>prod_spec=ProductionSpec([])</em>, <em>pred_spec=&lt;tyrell.spec.spec.PredicateSpec object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_enum_production">
+<code class="descname">get_enum_production</code><span class="sig-paren">(</span><em>ty: tyrell.spec.type.EnumType</em>, <em>value: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_enum_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_enum_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_enum_production_or_raise">
+<code class="descname">get_enum_production_or_raise</code><span class="sig-paren">(</span><em>ty: tyrell.spec.type.EnumType</em>, <em>value: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_enum_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_enum_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_function_production">
+<code class="descname">get_function_production</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_function_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_function_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_function_production_or_raise">
+<code class="descname">get_function_production_or_raise</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_function_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_function_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_function_productions">
+<code class="descname">get_function_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_function_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_function_productions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_param_production">
+<code class="descname">get_param_production</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_param_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_param_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_param_production_or_raise">
+<code class="descname">get_param_production_or_raise</code><span class="sig-paren">(</span><em>index: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_param_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_param_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_param_productions">
+<code class="descname">get_param_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_param_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_param_productions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_predicates_with_name">
+<code class="descname">get_predicates_with_name</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.predicate.Predicate]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_predicates_with_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_predicates_with_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_production">
+<code class="descname">get_production</code><span class="sig-paren">(</span><em>id: int</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_production_or_raise">
+<code class="descname">get_production_or_raise</code><span class="sig-paren">(</span><em>id: int</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.production.Production<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_production_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_production_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_productions_with_lhs">
+<code class="descname">get_productions_with_lhs</code><span class="sig-paren">(</span><em>ty: Union[str, tyrell.spec.type.Type]</em><span class="sig-paren">)</span> &#x2192; List[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_productions_with_lhs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_productions_with_lhs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_type">
+<code class="descname">get_type</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.type.Type]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.get_type_or_raise">
+<code class="descname">get_type_or_raise</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.type.Type<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.get_type_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.get_type_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.TyrellSpec.input">
+<code class="descname">input</code><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.TyrellSpec.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.num_input">
+<code class="descname">num_input</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.num_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.num_input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.num_predicates">
+<code class="descname">num_predicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.num_predicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.num_predicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of predicates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.num_productions">
+<code class="descname">num_productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.num_productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.num_productions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.num_types">
+<code class="descname">num_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.num_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.num_types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.spec.TyrellSpec.output">
+<code class="descname">output</code><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.predicates">
+<code class="descname">predicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterable[tyrell.spec.predicate.Predicate]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.predicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.predicates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.productions">
+<code class="descname">productions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterable[tyrell.spec.production.Production]<a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.productions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.productions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.spec.TyrellSpec.types">
+<code class="descname">types</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/spec.html#TyrellSpec.types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.spec.TyrellSpec.types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.test_spec">
+<span id="tyrell-spec-test-spec-module"></span><h2>tyrell.spec.test_spec module<a class="headerlink" href="#module-tyrell.spec.test_spec" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.test_spec.TestTyrellSpec">
+<em class="property">class </em><code class="descclassname">tyrell.spec.test_spec.</code><code class="descname">TestTyrellSpec</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/test_spec.html#TestTyrellSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.test_spec.TestTyrellSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.spec.test_spec.TestTyrellSpec.test_predicate">
+<code class="descname">test_predicate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/test_spec.html#TestTyrellSpec.test_predicate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.test_spec.TestTyrellSpec.test_predicate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.test_spec.TestTyrellSpec.test_production">
+<code class="descname">test_production</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/test_spec.html#TestTyrellSpec.test_production"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.test_spec.TestTyrellSpec.test_production" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.test_spec.TestTyrellSpec.test_type">
+<code class="descname">test_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/test_spec.html#TestTyrellSpec.test_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.test_spec.TestTyrellSpec.test_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.type">
+<span id="tyrell-spec-type-module"></span><h2>tyrell.spec.type module<a class="headerlink" href="#module-tyrell.spec.type" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.spec.type.EnumType">
+<em class="property">class </em><code class="descclassname">tyrell.spec.type.</code><code class="descname">EnumType</code><span class="sig-paren">(</span><em>name: str</em>, <em>domain: List[Any] = []</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/type.html#EnumType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.EnumType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.type.Type" title="tyrell.spec.type.Type"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.type.Type</span></code></a></p>
+<p>A special kind of type whose domain is finite and specified up-front</p>
+<dl class="attribute">
+<dt id="tyrell.spec.type.EnumType.domain">
+<code class="descname">domain</code><a class="headerlink" href="#tyrell.spec.type.EnumType.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.EnumType.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#EnumType.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.EnumType.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.EnumType.is_value">
+<code class="descname">is_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#EnumType.is_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.EnumType.is_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.type.Type">
+<em class="property">class </em><code class="descclassname">tyrell.spec.type.</code><code class="descname">Type</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/type.html#Type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.Type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A generic class for types in DSL</p>
+<dl class="method">
+<dt id="tyrell.spec.type.Type.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#Type.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.Type.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.Type.is_value">
+<code class="descname">is_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#Type.is_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.Type.is_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.type.Type.name">
+<code class="descname">name</code><a class="headerlink" href="#tyrell.spec.type.Type.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.spec.type.ValueType">
+<em class="property">class </em><code class="descclassname">tyrell.spec.type.</code><code class="descname">ValueType</code><span class="sig-paren">(</span><em>name: str</em>, <em>properties: List[Tuple[str</em>, <em>tyrell.spec.expr.ExprType]] = []</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/type.html#ValueType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.ValueType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.spec.type.Type" title="tyrell.spec.type.Type"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.spec.type.Type</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.spec.type.ValueType.get_property">
+<code class="descname">get_property</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; Optional[tyrell.spec.expr.ExprType]<a class="reference internal" href="../_modules/tyrell/spec/type.html#ValueType.get_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.ValueType.get_property" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.ValueType.get_property_or_raise">
+<code class="descname">get_property_or_raise</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; tyrell.spec.expr.ExprType<a class="reference internal" href="../_modules/tyrell/spec/type.html#ValueType.get_property_or_raise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.ValueType.get_property_or_raise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.ValueType.is_enum">
+<code class="descname">is_enum</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#ValueType.is_enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.ValueType.is_enum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.spec.type.ValueType.is_value">
+<code class="descname">is_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/spec/type.html#ValueType.is_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.type.ValueType.is_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.spec.type.ValueType.properties">
+<code class="descname">properties</code><a class="headerlink" href="#tyrell.spec.type.ValueType.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec.util">
+<span id="tyrell-spec-util-module"></span><h2>tyrell.spec.util module<a class="headerlink" href="#module-tyrell.spec.util" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tyrell.spec.util.enum_set_domain">
+<code class="descclassname">tyrell.spec.util.</code><code class="descname">enum_set_domain</code><span class="sig-paren">(</span><em>elem_domain</em>, <em>max_len</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/spec/util.html#enum_set_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.spec.util.enum_set_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.spec">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tyrell.spec" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tyrell Source Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tyrell.html">tyrell package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Tyrell Source Documentation</a><ul>
+  <li><a href="tyrell.html">tyrell package</a><ul>
+      <li>Previous: <a href="tyrell.interpreter.html" title="previous chapter">tyrell.interpreter package</a></li>
+      <li>Next: <a href="tyrell.synthesizer.html" title="next chapter">tyrell.synthesizer package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/tyrell.spec.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Deduction-based Synthesizer &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tyrell Source Documentation" href="../source/modules.html" />
+    <link rel="prev" title="Basic Synthesizer" href="02_synthesizer_basic.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="deduction-based-synthesizer">
+<h1>Deduction-based Synthesizer<a class="headerlink" href="#deduction-based-synthesizer" title="Permalink to this headline">¶</a></h1>
+<p>Recall the synthesizer loop we had in the beginning of <a class="reference internal" href="02_synthesizer_basic.html"><span class="doc">the previous tutorial</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synthesize</span><span class="p">(</span><span class="n">enumerator</span><span class="p">,</span> <span class="n">decider</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">prog</span> <span class="ow">in</span> <span class="n">enumerator</span><span class="o">.</span><span class="n">enumerate</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">decider</span><span class="o">.</span><span class="n">is_success</span><span class="p">(</span><span class="n">prog</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">prog</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p>We mentioned that for this basic search scheme there is room for improvement. Here is one observation: currently the decider does not really communicate much with the enumerator. The enumerator only gets a yes/no answer from the decider and that’s it. If the program is accepted, all is good. But if it is not, the enumerator can do nothing except coming up with the next candidate in the search space.</p>
+<p>What if the decider, in addition to rejecting the program, can provide more insights to the enumerator? What if the decider is able to tell the enumerator why a program is rejected, and what if the enumerator is able to utilize the reason returned by the decider to make sure that programs that gets rejected by the same reason never gets enumerated again, which may lead to a significant cut of its search space? This simple idea is at the heart of deduction-based synthesis.</p>
+<div class="section" id="dynamic-feedback">
+<h2>Dynamic feedback<a class="headerlink" href="#dynamic-feedback" title="Permalink to this headline">¶</a></h2>
+<p>How would the decider figure out why a program gets rejected? In the setting of input-output example-based synthesis, the decider reject a program because it does not conform to some of the provided examples. However, such examples cannot be used as the feedback directly since they are not really meaningful to the enumerator: if the enumerator knows beforehand which programs are good for all the examples, there would be no point in having a decider in the first place!</p>
+<p>To get more information, the decider needs some additional guidance from the user. Take this (somewhat contrived) example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">PostOrderInterpreter</span><span class="p">,</span> <span class="n">GeneralError</span>
+
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  enum IntConst {</span>
+<span class="s1">    &quot;-2&quot;, &quot;-1&quot;, &quot;0&quot;, &quot;1&quot;, &quot;2&quot;</span>
+<span class="s1">  }</span>
+<span class="s1">  value IntValue;</span>
+<span class="s1">  program ex0(IntValue) -&gt; IntValue;</span>
+<span class="s1">  func foo: IntValue -&gt; IntValue, IntConst;</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Ex0Interpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">eval_IntConst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eval_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we human can see that the integer square root operation in <code class="docutils literal notranslate"><span class="pre">eval_foo</span></code> certainly requires that its argument is no less than zero. If the decider sees that <code class="docutils literal notranslate"><span class="pre">foo(&#64;param0,</span> <span class="pre">-2)</span></code> is being generated, it should be smart enough to inform the enumerator that it should never let the second parameter of <code class="docutils literal notranslate"><span class="pre">foo</span></code> be less than 1.</p>
+<p>In Tyrell, we convey this kind of dynamic information though <a class="reference internal" href="../source/tyrell.interpreter.html#tyrell.interpreter.interpreter.Interpreter.assertArg" title="tyrell.interpreter.interpreter.Interpreter.assertArg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">assertArg()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Ex0Interpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">eval_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertArg</span><span class="p">(</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span>  <span class="c1"># These two arguments are required to be directly taken from the formal arguments of eval_foo()</span>
+            <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Specify which argument this assertion is about</span>
+            <span class="n">cond</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span>  <span class="c1"># Specify which condition the argument&#39;s value needs to satisfy</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sometimes we refer to the value of other parameters inside the assertion we wrote. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">PostOrderInterpreter</span><span class="p">,</span> <span class="n">GeneralError</span>
+
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  enum IntConst {</span>
+<span class="s1">    &quot;-3&quot;, &quot;-2&quot;, &quot;2&quot;, &quot;3&quot;</span>
+<span class="s1">  }</span>
+<span class="s1">  value IntValue;</span>
+<span class="s1">  program ex1(IntValue) -&gt; IntValue;</span>
+<span class="s1">  func bar: IntValue -&gt; IntValue, IntConst;</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Ex1Interpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">eval_IntConst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eval_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertArg</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">cond</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">capture_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># &lt;- This is needed</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that inside the lambda we pass to <code class="docutils literal notranslate"><span class="pre">cond</span></code>, the value of <code class="docutils literal notranslate"><span class="pre">args[0]</span></code> is referenced. Whenever that happens, we also need to tell <code class="docutils literal notranslate"><span class="pre">assertArg</span></code> that parameter index 0 is <em>captured</em> through <code class="docutils literal notranslate"><span class="pre">capture_indices</span></code>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Currently only assertions on enum nodes will be processed. But this is not a fundamental limitation and we should really extend the support to make runtime assertion like this more useful.</p>
+</div>
+</div>
+<div class="section" id="static-feedback">
+<h2>Static feedback<a class="headerlink" href="#static-feedback" title="Permalink to this headline">¶</a></h2>
+<p>Writing runtime assertion is not the only way of providing hints to the decider in Tyrell. Alternatively, we could, for each function, provide high-level descriptions on what they do in the spec:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">PostOrderInterpreter</span><span class="p">,</span> <span class="n">GeneralError</span>
+
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  value IntValue {</span>
+<span class="s1">    # Properties can be defined on value types.</span>
+<span class="s1">    is_pos: bool;</span>
+<span class="s1">  }</span>
+<span class="s1">  program ex2(IntValue, IntValue) -&gt; IntValue;</span>
+
+<span class="s1">  # Arguments in function spec can be (optionally) named. This will come in handy when writing specs for them.</span>
+<span class="s1">  func mult: IntValue r -&gt; IntValue a, IntValue b {</span>
+<span class="s1">    # Constraints can be defined on function specs</span>
+<span class="s1">    is_pos(a) &amp;&amp; is_pos(b) ==&gt; is_pos(r);</span>
+<span class="s1">    # Multiple constraints will be joined together with conjunction</span>
+<span class="s1">    is_pos(a) &amp;&amp; !is_pos(b) ==&gt; !is_pos(r);</span>
+<span class="s1">  }</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Ex2Interpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">eval_IntConst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eval_mult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Interpret the defined properties by defining &#39;apply_ZZZ&#39; for each property named ZZZ</span>
+    <span class="k">def</span> <span class="nf">apply_is_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="c1"># v refers to the interpreted value</span>
+        <span class="k">return</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="putting-it-together">
+<h2>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">¶</a></h2>
+<p>In the Tyrell framework, writing dynamic assertions and static constraints are useful only when both the decider and the enumerator is willing them to process them. Unfortunately, neither <a class="reference internal" href="../source/tyrell.enumerator.html#tyrell.enumerator.exhaustive.ExhaustiveEnumerator" title="tyrell.enumerator.exhaustive.ExhaustiveEnumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExhaustiveEnumerator</span></code></a> nor <a class="reference internal" href="../source/tyrell.decider.html#tyrell.decider.example_base.ExampleDecider" title="tyrell.decider.example_base.ExampleDecider"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExampleDecider</span></code></a> mentioned in the <a class="reference internal" href="02_synthesizer_basic.html"><span class="doc">the previous tutorial</span></a> does the processing.</p>
+<p>If we want the synthesizer to understand those assertions and constraints we wrote, the combination of <a class="reference internal" href="../source/tyrell.enumerator.html#tyrell.enumerator.smt.SmtEnumerator" title="tyrell.enumerator.smt.SmtEnumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">SmtEnumerator</span></code></a> and <a class="reference internal" href="../source/tyrell.decider.html#tyrell.decider.example_constraint.ExampleConstraintDecider" title="tyrell.decider.example_constraint.ExampleConstraintDecider"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExampleConstraintDecider</span></code></a> is needed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse_file</span>
+<span class="kn">from</span> <span class="nn">tyrell.enumerator</span> <span class="kn">import</span> <span class="n">SmtEnumerator</span>
+<span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">PostOrderInterpreter</span>
+<span class="kn">from</span> <span class="nn">tyrell.decider</span> <span class="kn">import</span> <span class="n">Example</span><span class="p">,</span> <span class="n">ExampleConstraintDecider</span>
+<span class="kn">from</span> <span class="nn">tyrell.synthesizer</span> <span class="kn">import</span> <span class="n">Synthesizer</span>
+
+<span class="k">class</span> <span class="nc">InterpreterWithAssert</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;spec_with_constraints.tyrell&#39;</span><span class="p">)</span>
+<span class="n">synthesizer</span> <span class="o">=</span> <span class="n">Synthesizer</span><span class="p">(</span>
+    <span class="n">enumerator</span><span class="o">=</span><span class="n">SmtEnumerator</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>  <span class="c1"># loc is the number of function calls in the synthesized program</span>
+    <span class="n">decider</span><span class="o">=</span><span class="n">ExampleConstraintDecider</span><span class="p">(</span>
+        <span class="n">spec</span><span class="o">=</span><span class="n">spec</span><span class="p">,</span>  <span class="c1"># spec is needed for this decider</span>
+        <span class="n">interpreter</span><span class="o">=</span><span class="n">InterpreterWithAssert</span><span class="p">(),</span>
+        <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Example</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+            <span class="n">Example</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="mi">9</span><span class="p">),</span>
+            <span class="n">Example</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">output</span><span class="o">=-</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">Example</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">synthesizer</span><span class="o">.</span><span class="n">synthesize</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Currently due to an implementation quirk, for <code class="docutils literal notranslate"><span class="pre">SmtEnumerator</span></code> to work there must be a dummy <code class="docutils literal notranslate"><span class="pre">Empty</span></code> value type and dummy <code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">empty:</span> <span class="pre">Empty</span> <span class="pre">-&gt;</span> <span class="pre">Empty</span></code> function definition included in the spec file.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_setup.html">Setting up a project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_language.html">Defining a DSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_synthesizer_basic.html">Basic Synthesizer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deduction-based Synthesizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">A Tutorial</a><ul>
+      <li>Previous: <a href="02_synthesizer_basic.html" title="previous chapter">Basic Synthesizer</a></li>
+      <li>Next: <a href="../source/modules.html" title="next chapter">Tyrell Source Documentation</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/tutorial/03_synthesizer_deduction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

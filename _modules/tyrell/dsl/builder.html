@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.dsl.builder &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tyrell.dsl.builder</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">sexpdata</span>
+<span class="kn">from</span> <span class="nn">.node</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..spec</span> <span class="k">import</span> <span class="n">TyrellSpec</span><span class="p">,</span> <span class="n">Production</span><span class="p">,</span> <span class="n">EnumType</span>
+<span class="kn">from</span> <span class="nn">..visitor</span> <span class="k">import</span> <span class="n">GenericVisitor</span>
+
+
+<div class="viewcode-block" id="ProductionVisitor"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.ProductionVisitor">[docs]</a><span class="k">class</span> <span class="nc">ProductionVisitor</span><span class="p">(</span><span class="n">GenericVisitor</span><span class="p">):</span>
+    <span class="n">_children</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_children</span> <span class="o">=</span> <span class="n">children</span>
+
+<div class="viewcode-block" id="ProductionVisitor.visit_enum_production"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.ProductionVisitor.visit_enum_production">[docs]</a>    <span class="k">def</span> <span class="nf">visit_enum_production</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AtomNode</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductionVisitor.visit_param_production"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.ProductionVisitor.visit_param_production">[docs]</a>    <span class="k">def</span> <span class="nf">visit_param_production</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ParamNode</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProductionVisitor.visit_function_production"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.ProductionVisitor.visit_function_production">[docs]</a>    <span class="k">def</span> <span class="nf">visit_function_production</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ApplyNode</span><span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_children</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Builder"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder">[docs]</a><span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;A factory class to build AST node&#39;&#39;&#39;</span>
+
+    <span class="n">_spec</span><span class="p">:</span> <span class="n">TyrellSpec</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">TyrellSpec</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spec</span> <span class="o">=</span> <span class="n">spec</span>
+
+    <span class="k">def</span> <span class="nf">_make_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prod</span><span class="p">:</span> <span class="n">Production</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ProductionVisitor</span><span class="p">(</span><span class="n">children</span><span class="p">)</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Builder.make_node"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.make_node">[docs]</a>    <span class="k">def</span> <span class="nf">make_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Production</span><span class="p">],</span> <span class="n">children</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a node with the given production index and children.</span>
+<span class="sd">        Raise `KeyError` or `ValueError` if an error occurs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spec</span><span class="o">.</span><span class="n">get_production_or_raise</span><span class="p">(</span><span class="n">src</span><span class="p">),</span> <span class="n">children</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">Production</span><span class="p">):</span>
+            <span class="c1"># Sanity check first</span>
+            <span class="n">prod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec</span><span class="o">.</span><span class="n">get_production_or_raise</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">src</span> <span class="o">!=</span> <span class="n">prod</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;DSL Builder found inconsistent production instance&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_node</span><span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="n">children</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;make_node() only accepts int or production, but found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">src</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Builder.make_enum"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.make_enum">[docs]</a>    <span class="k">def</span> <span class="nf">make_enum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convenient method to create an enum node.</span>
+<span class="sd">        Raise `KeyError` or `ValueError` if an error occurs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_type_or_raise</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_enum_production_or_raise</span><span class="p">(</span><span class="n">ty</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_node</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Builder.make_param"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.make_param">[docs]</a>    <span class="k">def</span> <span class="nf">make_param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convenient method to create a param node.</span>
+<span class="sd">        Raise `KeyError` or `ValueError` if an error occurs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param_production_or_raise</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_node</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Builder.make_apply"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.make_apply">[docs]</a>    <span class="k">def</span> <span class="nf">make_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Node</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convenient method to create an apply node.</span>
+<span class="sd">        Raise `KeyError` or `ValueError` if an error occurs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_function_production_or_raise</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_node</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_from_sexp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sexp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sexp</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">sexp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sexp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># None of our nodes serializes to atom</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Cannot parse sexp into dsl.Node: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sexp</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="n">sexp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+
+        <span class="c1"># First check for param node</span>
+        <span class="k">if</span> <span class="n">sym</span> <span class="o">==</span> <span class="s1">&#39;@param&#39;</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sexp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_param</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="c1"># Next, check for atom node</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ty</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ty</span><span class="o">.</span><span class="n">is_enum</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sexp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1"># Could be a enum list</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sexp</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="n">ty</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sexp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="n">ty</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="c1"># Finally, check for apply node</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_from_sexp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sexp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Builder.from_sexp_string"><a class="viewcode-back" href="../../../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.from_sexp_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_sexp_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sexp_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Convenient method to create an AST from an sexp string.</span>
+<span class="sd">        Raise `KeyError` or `ValueError` if an error occurs</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sexp</span> <span class="o">=</span> <span class="n">sexpdata</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sexp_str</span><span class="p">)</span>
+        <span class="c1"># This library is liberal on its exception raising...</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Sexp parsing error: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_sexp</span><span class="p">(</span><span class="n">sexp</span><span class="p">)</span></div>
+
+    <span class="c1"># For convenience, expose all methods in TyrellSpec so that the client do not need to keep a reference of it</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spec</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,157 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Setting up a project &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Defining a DSL" href="01_language.html" />
+    <link rel="prev" title="A Tutorial" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="setting-up-a-project">
+<h1>Setting up a project<a class="headerlink" href="#setting-up-a-project" title="Permalink to this headline">¶</a></h1>
+<p>First of all, make sure that your system has a python version &gt;=3.6 installed.</p>
+<p>It is recommended that a <a class="reference external" href="https://docs.python.org/3/library/venv.html">virtual environment</a> is used when starting with a new project:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir venv
+$ python3 -m venv ./venv
+$ <span class="nb">source</span> venv/bin/activate
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now, there are several ways you may install the Tyrell framework and its dependencies.</p>
+<ul>
+<li><p class="first">Install Tyrell from PyPI:</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This option is not possible at the moment.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install tyrell
+</pre></div>
+</div>
+</li>
+<li><p class="first">Obtaining a tarball distribution of tyrell. Suppose the name of the tarball is <code class="docutils literal notranslate"><span class="pre">tyrell-0.1.tar.gz</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install tyrell-0.1.tar.gz
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One of Tyrell’s dependency, <cite>z3-solver</cite>, takes a long time to build. Please be patient.</p>
+</div>
+<p>To test whether the installation is successful, run the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ parse-tyrell-spec --help
+</pre></div>
+</div>
+</div></blockquote>
+<p>If the help message is correctly shown, everything should be good.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Tutorial</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up a project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_language.html">Defining a DSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_synthesizer_basic.html">Basic Synthesizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_synthesizer_deduction.html">Deduction-based Synthesizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">A Tutorial</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">A Tutorial</a></li>
+      <li>Next: <a href="01_language.html" title="next chapter">Defining a DSL</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/tutorial/00_setup.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,422 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.enumerator package &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tyrell.interpreter package" href="tyrell.interpreter.html" />
+    <link rel="prev" title="tyrell.dsl package" href="tyrell.dsl.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tyrell-enumerator-package">
+<h1>tyrell.enumerator package<a class="headerlink" href="#tyrell-enumerator-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tyrell.enumerator.enumerator">
+<span id="tyrell-enumerator-enumerator-module"></span><h2>tyrell.enumerator.enumerator module<a class="headerlink" href="#module-tyrell.enumerator.enumerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.enumerator.Enumerator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.enumerator.</code><code class="descname">Enumerator</code><a class="reference internal" href="../_modules/tyrell/enumerator/enumerator.html#Enumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.enumerator.Enumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="method">
+<dt id="tyrell.enumerator.enumerator.Enumerator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/enumerator/enumerator.html#Enumerator.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.enumerator.Enumerator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main API for this class. Subclasses are required to override this method.
+Enumerate the next AST, or return <cite>None</cite> if all ASTs has been enumerated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.enumerator.Enumerator.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>info: Any = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/tyrell/enumerator/enumerator.html#Enumerator.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.enumerator.Enumerator.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the internal state of the enumerator. This can be useful when trying to prune the search space.
+By default, it does nothing.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator.exhaustive">
+<span id="tyrell-enumerator-exhaustive-module"></span><h2>tyrell.enumerator.exhaustive module<a class="headerlink" href="#module-tyrell.enumerator.exhaustive" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.exhaustive.ExhaustiveEnumerator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.exhaustive.</code><code class="descname">ExhaustiveEnumerator</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec</em>, <em>max_depth: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/exhaustive.html#ExhaustiveEnumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.exhaustive.ExhaustiveEnumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.enumerator.from_iterator.FromIteratorEnumerator" title="tyrell.enumerator.from_iterator.FromIteratorEnumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.enumerator.from_iterator.FromIteratorEnumerator</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.enumerator.exhaustive.ExhaustiveIterator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.exhaustive.</code><code class="descname">ExhaustiveIterator</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec</em>, <em>max_depth: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/exhaustive.html#ExhaustiveIterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.exhaustive.ExhaustiveIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.enumerator.exhaustive.ExhaustiveIterator.iter">
+<code class="descname">iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Iterator[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/enumerator/exhaustive.html#ExhaustiveIterator.iter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.exhaustive.ExhaustiveIterator.iter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator.from_iterator">
+<span id="tyrell-enumerator-from-iterator-module"></span><h2>tyrell.enumerator.from_iterator module<a class="headerlink" href="#module-tyrell.enumerator.from_iterator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.from_iterator.FromIteratorEnumerator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.from_iterator.</code><code class="descname">FromIteratorEnumerator</code><span class="sig-paren">(</span><em>iter: Iterator[tyrell.dsl.node.Node]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/from_iterator.html#FromIteratorEnumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.from_iterator.FromIteratorEnumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.enumerator.enumerator.Enumerator" title="tyrell.enumerator.enumerator.Enumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.enumerator.enumerator.Enumerator</span></code></a></p>
+<p>A enumerator that is constructed from a python iterator.</p>
+<dl class="method">
+<dt id="tyrell.enumerator.from_iterator.FromIteratorEnumerator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional[tyrell.dsl.node.Node]<a class="reference internal" href="../_modules/tyrell/enumerator/from_iterator.html#FromIteratorEnumerator.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.from_iterator.FromIteratorEnumerator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main API for this class. Subclasses are required to override this method.
+Enumerate the next AST, or return <cite>None</cite> if all ASTs has been enumerated.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.enumerator.from_iterator.make_empty_enumerator">
+<code class="descclassname">tyrell.enumerator.from_iterator.</code><code class="descname">make_empty_enumerator</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.enumerator.enumerator.Enumerator<a class="reference internal" href="../_modules/tyrell/enumerator/from_iterator.html#make_empty_enumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.from_iterator.make_empty_enumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an enumerator that enumerates nothing.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.enumerator.from_iterator.make_list_enumerator">
+<code class="descclassname">tyrell.enumerator.from_iterator.</code><code class="descname">make_list_enumerator</code><span class="sig-paren">(</span><em>progs: List[tyrell.dsl.node.Node]</em><span class="sig-paren">)</span> &#x2192; tyrell.enumerator.enumerator.Enumerator<a class="reference internal" href="../_modules/tyrell/enumerator/from_iterator.html#make_list_enumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.from_iterator.make_list_enumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an enumerator that only enumerates programs in the given list.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.enumerator.from_iterator.make_singleton_enumerator">
+<code class="descclassname">tyrell.enumerator.from_iterator.</code><code class="descname">make_singleton_enumerator</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; tyrell.enumerator.enumerator.Enumerator<a class="reference internal" href="../_modules/tyrell/enumerator/from_iterator.html#make_singleton_enumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.from_iterator.make_singleton_enumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an enumerator that only enumerates the given program.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator.optimizer">
+<span id="tyrell-enumerator-optimizer-module"></span><h2>tyrell.enumerator.optimizer module<a class="headerlink" href="#module-tyrell.enumerator.optimizer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.optimizer.Optimizer">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.optimizer.</code><code class="descname">Optimizer</code><span class="sig-paren">(</span><em>solver</em>, <em>spec</em>, <em>variables</em>, <em>nodes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.enumerator.optimizer.Optimizer.assumptions">
+<code class="descname">assumptions</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.computeCost">
+<code class="descname">computeCost</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.computeCost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.computeCost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.optimizer.Optimizer.cost_relax_vars">
+<code class="descname">cost_relax_vars</code><em class="property"> = {}</em><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.cost_relax_vars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.createVariablesOccurrence">
+<code class="descname">createVariablesOccurrence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.createVariablesOccurrence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.createVariablesOccurrence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.isSubsetSum">
+<code class="descname">isSubsetSum</code><span class="sig-paren">(</span><em>set</em>, <em>n</em>, <em>sum</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.isSubsetSum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.isSubsetSum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.mk_is_not_parent">
+<code class="descname">mk_is_not_parent</code><span class="sig-paren">(</span><em>parent</em>, <em>child</em>, <em>weight=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.mk_is_not_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.mk_is_not_parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.mk_is_parent">
+<code class="descname">mk_is_parent</code><span class="sig-paren">(</span><em>parent</em>, <em>child</em>, <em>weight=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.mk_is_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.mk_is_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>children production will have the parent production with probability weight</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.mk_not_occurs">
+<code class="descname">mk_not_occurs</code><span class="sig-paren">(</span><em>production</em>, <em>weight=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.mk_not_occurs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.mk_not_occurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>a production will not occur with a given probability</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.mk_occurs">
+<code class="descname">mk_occurs</code><span class="sig-paren">(</span><em>production</em>, <em>weight=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.mk_occurs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.mk_occurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>a production will occur with a given probability</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.optimizer.Optimizer.optimize">
+<code class="descname">optimize</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/optimizer.html#Optimizer.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.optimizer.Optimizer.relax_vars">
+<code class="descname">relax_vars</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.relax_vars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.optimizer.Optimizer.var_occurs">
+<code class="descname">var_occurs</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.optimizer.Optimizer.var_occurs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator.random">
+<span id="tyrell-enumerator-random-module"></span><h2>tyrell.enumerator.random module<a class="headerlink" href="#module-tyrell.enumerator.random" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.random.RandomEnumerator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.random.</code><code class="descname">RandomEnumerator</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec</em>, <em>max_depth: int</em>, <em>seed: Optional[int] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/random.html#RandomEnumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.random.RandomEnumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.enumerator.enumerator.Enumerator" title="tyrell.enumerator.enumerator.Enumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.enumerator.enumerator.Enumerator</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.enumerator.random.RandomEnumerator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/random.html#RandomEnumerator.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.random.RandomEnumerator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main API for this class. Subclasses are required to override this method.
+Enumerate the next AST, or return <cite>None</cite> if all ASTs has been enumerated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator.smt">
+<span id="tyrell-enumerator-smt-module"></span><h2>tyrell.enumerator.smt module<a class="headerlink" href="#module-tyrell.enumerator.smt" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.enumerator.smt.AST">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.smt.</code><code class="descname">AST</code><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#AST"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.AST" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.enumerator.smt.ASTNode">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.smt.</code><code class="descname">ASTNode</code><span class="sig-paren">(</span><em>nb=None</em>, <em>depth=None</em>, <em>children=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#ASTNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.ASTNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.enumerator.smt.SmtEnumerator">
+<em class="property">class </em><code class="descclassname">tyrell.enumerator.smt.</code><code class="descname">SmtEnumerator</code><span class="sig-paren">(</span><em>spec</em>, <em>depth=None</em>, <em>loc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.enumerator.enumerator.Enumerator" title="tyrell.enumerator.enumerator.Enumerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.enumerator.enumerator.Enumerator</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.blockModel">
+<code class="descname">blockModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.blockModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.blockModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.buildKTree">
+<code class="descname">buildKTree</code><span class="sig-paren">(</span><em>children</em>, <em>depth</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.buildKTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.buildKTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a K-tree that will contain the program</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.buildProgram">
+<code class="descname">buildProgram</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.buildProgram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.buildProgram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createChildrenConstraints">
+<code class="descname">createChildrenConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createChildrenConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createChildrenConstraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createFunctionConstraints">
+<code class="descname">createFunctionConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createFunctionConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createFunctionConstraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a function occurs then set the function variable to 1 and 0 otherwise</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createInputConstraints">
+<code class="descname">createInputConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createInputConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createInputConstraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each input will appear at least once in the program</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createLeafConstraints">
+<code class="descname">createLeafConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createLeafConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createLeafConstraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createLocConstraints">
+<code class="descname">createLocConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createLocConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createLocConstraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exactly k functions are used in the program</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createOutputConstraints">
+<code class="descname">createOutputConstraints</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createOutputConstraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createOutputConstraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>The output production matches the output type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.createVariables">
+<code class="descname">createVariables</code><span class="sig-paren">(</span><em>solver</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.createVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.createVariables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.initLeafProductions">
+<code class="descname">initLeafProductions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.initLeafProductions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.initLeafProductions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.leaf_productions">
+<code class="descname">leaf_productions</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.leaf_productions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.maxChildren">
+<code class="descname">maxChildren</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.maxChildren"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.maxChildren" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the maximum number of children in the productions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main API for this class. Subclasses are required to override this method.
+Enumerate the next AST, or return <cite>None</cite> if all ASTs has been enumerated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.program2tree">
+<code class="descname">program2tree</code><em class="property"> = {}</em><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.program2tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.resolve_predicates">
+<code class="descname">resolve_predicates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.resolve_predicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.resolve_predicates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>info=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/enumerator/smt.html#SmtEnumerator.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the internal state of the enumerator. This can be useful when trying to prune the search space.
+By default, it does nothing.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.variables">
+<code class="descname">variables</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.variables_fun">
+<code class="descname">variables_fun</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.variables_fun" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.enumerator.smt.SmtEnumerator.z3_solver">
+<code class="descname">z3_solver</code><em class="property"> = []</em><a class="headerlink" href="#tyrell.enumerator.smt.SmtEnumerator.z3_solver" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.enumerator">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tyrell.enumerator" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tyrell Source Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tyrell.html">tyrell package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Tyrell Source Documentation</a><ul>
+  <li><a href="tyrell.html">tyrell package</a><ul>
+      <li>Previous: <a href="tyrell.dsl.html" title="previous chapter">tyrell.dsl package</a></li>
+      <li>Next: <a href="tyrell.interpreter.html" title="next chapter">tyrell.interpreter package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/tyrell.enumerator.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,161 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.decider.assert_violation_handler &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tyrell.decider.assert_violation_handler</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">cast</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">..spec</span> <span class="k">import</span> <span class="n">TyrellSpec</span><span class="p">,</span> <span class="n">Production</span>
+<span class="kn">from</span> <span class="nn">..dsl</span> <span class="k">import</span> <span class="n">AtomNode</span><span class="p">,</span> <span class="n">dfs</span>
+<span class="kn">from</span> <span class="nn">..interpreter</span> <span class="k">import</span> <span class="n">Interpreter</span><span class="p">,</span> <span class="n">InterpreterError</span><span class="p">,</span> <span class="n">AssertionViolation</span>
+<span class="kn">from</span> <span class="nn">.blame</span> <span class="k">import</span> <span class="n">Blame</span>
+
+
+<div class="viewcode-block" id="AssertionViolationHandler"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.assert_violation_handler.AssertionViolationHandler">[docs]</a><span class="k">class</span> <span class="nc">AssertionViolationHandler</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Automatically compute blames for dynamic type errors</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">_spec</span><span class="p">:</span> <span class="n">TyrellSpec</span>
+    <span class="n">_interp</span><span class="p">:</span> <span class="n">Interpreter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">TyrellSpec</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">:</span> <span class="n">Interpreter</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spec</span> <span class="o">=</span> <span class="n">spec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp</span> <span class="o">=</span> <span class="n">interpreter</span>
+
+    <span class="k">def</span> <span class="nf">_compute_blame_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">AssertionViolation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Blame</span><span class="p">]:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">node</span>
+        <span class="n">capture_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">captures</span><span class="p">)</span>
+        <span class="c1"># Exclude the failed child itself</span>
+        <span class="n">capture_set</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">capture_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">capture_set</span><span class="p">]</span>
+
+        <span class="n">blame_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">capture_node</span> <span class="ow">in</span> <span class="n">capture_nodes</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">(</span><span class="n">capture_node</span><span class="p">):</span>
+                <span class="n">blame_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Blame</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">production</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">blame_nodes</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_analyze_enum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prod</span><span class="p">:</span> <span class="n">Production</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">AssertionViolation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Blame</span><span class="p">]]:</span>
+        <span class="n">blames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">arg_node</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">arg</span>
+        <span class="n">blame_base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_blame_base</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">alt_prod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec</span><span class="o">.</span><span class="n">get_productions_with_lhs</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">lhs</span><span class="p">):</span>
+            <span class="n">alt_node</span> <span class="o">=</span> <span class="n">AtomNode</span><span class="p">(</span><span class="n">alt_prod</span><span class="p">)</span>
+            <span class="c1"># Inputs doesn&#39;t matter here as we don&#39;t have any ParamNode</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">alt_node</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">error</span><span class="o">.</span><span class="n">reason</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="n">blames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">blame_base</span> <span class="o">+</span> <span class="p">[</span><span class="n">Blame</span><span class="p">(</span><span class="n">arg_node</span><span class="p">,</span> <span class="n">alt_prod</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">blames</span>
+
+<div class="viewcode-block" id="AssertionViolationHandler.handle_assertion_violation"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_assertion_violation">[docs]</a>    <span class="k">def</span> <span class="nf">handle_assertion_violation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">AssertionViolation</span><span class="p">):</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">arg</span><span class="o">.</span><span class="n">production</span>
+        <span class="k">if</span> <span class="n">prod</span><span class="o">.</span><span class="n">is_enum</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyze_enum</span><span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># TODO: Handle other types of production</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="AssertionViolationHandler.handle_interpreter_error"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_interpreter_error">[docs]</a>    <span class="k">def</span> <span class="nf">handle_interpreter_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">InterpreterError</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">AssertionViolation</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">dyn_type_error</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">AssertionViolation</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_assertion_violation</span><span class="p">(</span><span class="n">dyn_type_error</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

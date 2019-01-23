@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Defining a DSL &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Synthesizer" href="02_synthesizer_basic.html" />
+    <link rel="prev" title="Setting up a project" href="00_setup.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="defining-a-dsl">
+<h1>Defining a DSL<a class="headerlink" href="#defining-a-dsl" title="Permalink to this headline">¶</a></h1>
+<p>Tyrell is a framework that helps people build program <em>synthesizers</em>.</p>
+<p>A synthesizer, as the name suggests, generates <em>programs</em> as its output. Therefore the first question to ask when building a synthesizer is: what do these programs looks like?</p>
+<div class="section" id="shape-of-a-program">
+<h2>Shape of a program<a class="headerlink" href="#shape-of-a-program" title="Permalink to this headline">¶</a></h2>
+<p>The Tyrell framework recognizes programs in a simplistic form: a program is an experession that can either be an atom or a function application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">program</span> <span class="p">:</span><span class="o">=</span> <span class="n">expr</span>
+<span class="n">expr</span>    <span class="p">:</span><span class="o">=</span> <span class="n">atom</span>
+         <span class="o">|</span> <span class="n">func</span> <span class="p">(</span><span class="n">expr</span><span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">func</span></code> just represents a function identifier.</p>
+<p>An atom is either a constant, or a reference to the program’s input value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atom</span> <span class="p">:</span><span class="o">=</span> <span class="n">const</span>
+      <span class="o">|</span> <span class="s2">&quot;@param&quot;</span> <span class="n">INT</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">const</span></code> represent a constant identifier, and <cite>INT</cite> is just an index of the corresponding input value.</p>
+<p>For example, this is a valid program supported by Tyrell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mult</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="nd">@param0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minus</span><span class="p">(</span><span class="nd">@param1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Intuitively, this program tries to compute <cite>f(x, y) = (x + 1) * (y - 2)</cite>.</p>
+</div>
+<div class="section" id="syntax-specification">
+<span id="sec-syntax-spec"></span><h2>Syntax specification<a class="headerlink" href="#syntax-specification" title="Permalink to this headline">¶</a></h2>
+<p>Different domains may need different collections of functions and constants. Different functions may have different arities. It is also rarely the case that function arguments can take arbitrary values: Sometimes we know that certain argument may only be chosen from a small set of constants, and sometimes we know that certain argument may only be of a specific type.</p>
+<p>To help narrow down the space of valid programs, Tyrell uses <em>spec file</em> to refine a program’s specification on a syntax level. Here is a simple example of such a spec file:</p>
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>enum IntConst {
+  &quot;0&quot;, &quot;1&quot;, &quot;2&quot;
+}
+value IntValue;
+
+program BinaryArithFunc(IntValue, IntValue) -&gt; IntValue;
+
+func const: IntValue -&gt; IntConst;
+func plus: IntValue -&gt; IntValue, IntValue;
+func minus: IntValue -&gt; IntValue, IntValue;
+func mult: IntValue -&gt; IntValue, IntValue;
+</pre></div>
+</td></tr></table></div>
+<p>Each spec file starts with type definitions (line 1 to 4). Tyrell supports two kinds of types:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">enum</span></code> type represent a type whose universe is a pre-defined set. In this example, arguments of the <cite>IntConst</cite> type may only be <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;2&quot;</span></code>. Note that elements in the set must be quoted.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">value</span></code> type represent a type whose universe cannot be pre-determined. This should be the case for the input/output of the program.</li>
+</ul>
+<p>Next section in the spec file is the input/output definition (line 6). It starts with the keyword <code class="docutils literal notranslate"><span class="pre">program</span></code>, followed by the name of the program, followed by the input types of the program, and finally the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> symbol and the output type of the program. Note that the types that appear in this part of the spec file must all be <code class="docutils literal notranslate"><span class="pre">value</span></code> types.</p>
+<p>In the end (line 8 to 11), we specify what functions may appear in the program, and what kind of arguments these function takes. Note that unlike the input/output definition, the return type of the function comes before all the argument types. In this example, we defined 4 functions: one unary function <code class="docutils literal notranslate"><span class="pre">const</span></code> that takes a <code class="docutils literal notranslate"><span class="pre">IntConst</span></code> and produces a <code class="docutils literal notranslate"><span class="pre">IntValue</span></code>, and three binary functions <code class="docutils literal notranslate"><span class="pre">plus</span></code>, <code class="docutils literal notranslate"><span class="pre">minus</span></code>, and <code class="docutils literal notranslate"><span class="pre">mult</span></code> that take two <code class="docutils literal notranslate"><span class="pre">IntValue</span></code> and returns <code class="docutils literal notranslate"><span class="pre">IntValue</span></code>.</p>
+</div>
+<div class="section" id="spec-file-parsing">
+<h2>Spec file parsing<a class="headerlink" href="#spec-file-parsing" title="Permalink to this headline">¶</a></h2>
+<p>Tyrell comes with a pre-installed console script <code class="docutils literal notranslate"><span class="pre">parse-tyrell-spec</span></code> that can read the spec file and check its consistency. We can save our example as a file <code class="docutils literal notranslate"><span class="pre">bin_arith.tyrell</span></code>, and feed it into the script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ parse-tyrell-spec bin_arith.tyrell
+</pre></div>
+</div>
+<p>If the spec file is correctly written, no error would be reported.</p>
+<p>Alternatively, the spec parser can be directly accessed from a python script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse_file</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;bin_arith.tyrell&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../source/tyrell.spec.html#tyrell.spec.do_parse.parse_file" title="tyrell.spec.do_parse.parse_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_file()</span></code></a> function takes file path as a parameter, and it will try to parse the content in that file. If the spec file is stored in a in-memory string instead of an on-disk file, we use <a class="reference internal" href="../source/tyrell.spec.html#tyrell.spec.do_parse.parse" title="tyrell.spec.do_parse.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse()</span></code></a> function instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse_file</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    enum IntConst {</span>
+<span class="s1">      &quot;0&quot;, &quot;1&quot;, &quot;2&quot;</span>
+<span class="s1">    }</span>
+<span class="s1">    ...</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual-program-construction">
+<h2>Manual program construction<a class="headerlink" href="#manual-program-construction" title="Permalink to this headline">¶</a></h2>
+<p>With the parsed <code class="docutils literal notranslate"><span class="pre">spec</span></code>, one thing we can do is to quickly construct a program that conforms to this spec. This is available through <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.builder.Builder" title="tyrell.dsl.builder.Builder"><code class="xref py py-class docutils literal notranslate"><span class="pre">Builder</span></code></a> APIs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.spec</span> <span class="kn">import</span> <span class="n">parse_file</span>
+<span class="kn">from</span> <span class="nn">tyrell.dsl</span> <span class="kn">import</span> <span class="n">Builder</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse_file</span><span class="p">(</span><span class="s1">&#39;bin_arith.tyrell&#39;</span><span class="p">)</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">Builder</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+<span class="c1"># Below we construct the program f(x, y) = (x + 1) * (y - 2)</span>
+<span class="n">param_0</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_param</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Use make_param to create input reference</span>
+<span class="n">param_1</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_param</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">enum_1</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;IntConst&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>  <span class="c1"># Use make_enum to create node of IntConst type</span>
+<span class="n">enum_2</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;IntConst&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="n">const_1</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">enum_1</span><span class="p">])</span>  <span class="c1"># Use make_apply to create function application</span>
+<span class="n">const_2</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">enum_2</span><span class="p">])</span>  <span class="c1"># Note that we need to wrap the enums into a &#39;const&#39; node: otherwise the program will not type-check according to our spec</span>
+<span class="n">plus_node</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;plus&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">param_0</span><span class="p">,</span> <span class="n">const_1</span><span class="p">])</span>
+<span class="n">minus_node</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;minus&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">param_1</span><span class="p">,</span> <span class="n">const_2</span><span class="p">])</span>
+<span class="n">prog</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;mult&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">plus_node</span><span class="p">,</span> <span class="n">minus_node</span><span class="p">])</span>
+
+<span class="c1"># Pretty-print the program</span>
+<span class="k">print</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The process can be simplified using <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.builder.Builder.from_sexp_string" title="tyrell.dsl.builder.Builder.from_sexp_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_sexp_string()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Program can be specified with S-expressions</span>
+<span class="n">prog</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    (mult</span>
+<span class="sd">        (plus</span>
+<span class="sd">            (@param 0)</span>
+<span class="sd">            (const (IntConst &quot;1&quot;))</span>
+<span class="sd">        )</span>
+<span class="sd">        (minus</span>
+<span class="sd">            (@param 1)</span>
+<span class="sd">            (const (IntConst &quot;2&quot;))</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
+
+<span class="c1"># Dump the program back into sexp form</span>
+<span class="kn">from</span> <span class="nn">sexpdata</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">prog</span><span class="o">.</span><span class="n">to_sexp</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>The builder APIs returns objects of class <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.node.Node" title="tyrell.dsl.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>, which represent a node in the program’s <em>abstract syntax tree</em>. Take a look at the doc if you are interested in what methods are defined on it. Also, check out the nice utilities like <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.iterator.dfs" title="tyrell.dsl.iterator.dfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">dfs()</span></code></a>, <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.iterator.bfs" title="tyrell.dsl.iterator.bfs"><code class="xref py py-func docutils literal notranslate"><span class="pre">bfs()</span></code></a>, <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.indexer.NodeIndexer" title="tyrell.dsl.indexer.NodeIndexer"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeIndexer</span></code></a>, and <a class="reference internal" href="../source/tyrell.dsl.html#tyrell.dsl.parent_finder.ParentFinder" title="tyrell.dsl.parent_finder.ParentFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParentFinder</span></code></a>.</p>
+</div>
+<div class="section" id="semantics-specification">
+<h2>Semantics specification<a class="headerlink" href="#semantics-specification" title="Permalink to this headline">¶</a></h2>
+<p>Now that we know what the programs look like, the next question is what do they mean. In Tyrell, we attach semantic actions to the syntax through an <em>interpreter</em>.</p>
+<p>The base class for a Tyrell interepreter is <a class="reference internal" href="../source/tyrell.interpreter.html#tyrell.interpreter.interpreter.Interpreter" title="tyrell.interpreter.interpreter.Interpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreter</span></code></a>. To implement your own interpreter, inherit from <a class="reference internal" href="../source/tyrell.interpreter.html#tyrell.interpreter.interpreter.Interpreter" title="tyrell.interpreter.interpreter.Interpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreter</span></code></a> and override its <a class="reference internal" href="../source/tyrell.interpreter.html#tyrell.interpreter.interpreter.Interpreter.eval" title="tyrell.interpreter.interpreter.Interpreter.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval()</span></code></a> method, which takes a program and a list of input arguments, interpret the program, and returns the output.</p>
+<p>For example, a simple interpreter for the small language we defined in the previous section may look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">Interpreter</span>
+
+<span class="c1"># Define the interpreter subclass</span>
+<span class="k">class</span> <span class="nc">BinaryArithFuncInterpreter</span><span class="p">(</span><span class="n">Interpreter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># Create the interpreter object and run it</span>
+<span class="n">interp</span> <span class="o">=</span> <span class="n">BinaryArithFuncInterpreter</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(@param 0)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])))</span>    <span class="c1"># Prints 0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(const (IntConst 1))&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])))</span>  <span class="c1"># Prints 0</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(plus (@param 1) (IntConst 2))&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])))</span>  <span class="c1"># Prints 0</span>
+</pre></div>
+</div>
+<p>Well, this is not a super interested interpreter, as it interpret any program to <code class="docutils literal notranslate"><span class="pre">0</span></code>. To make it more interesting, we could have examined what the structure of <code class="docutils literal notranslate"><span class="pre">node</span></code> is, and take different actions accodring to whether it’s a parameter, an enum, or a function application (in which case you may need to recurse down and interpret its arguments).</p>
+<p>It turns out that in most situations we want to recursively interpret the programs in a <em>post order</em> tree traversal. In other words, for function applications we want to interpret the values of each the argument before the application itself can be interpreted. If that’s the case, we can save a lot of keystrokes for those boilerplate <code class="docutils literal notranslate"><span class="pre">node</span></code> inspection code by inheriting from <a class="reference internal" href="../source/tyrell.interpreter.html#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">PostOrderInterpreter</span></code></a>. If we take this option, all we need to do is to define one <code class="docutils literal notranslate"><span class="pre">eval</span></code> method for each enum and each function. Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tyrell.interpreter</span> <span class="kn">import</span> <span class="n">PostOrderInterpreter</span>
+
+<span class="c1"># Define the interpreter subclass by specifying the meaning of each enum and each function</span>
+<span class="k">class</span> <span class="nc">BinaryArithFuncInterpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+    <span class="c1"># First, interpret the enums by defining method &#39;eval_XXX&#39; for each enum type named XXX.</span>
+
+    <span class="k">def</span> <span class="nf">eval_IntConst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="c1"># The argument v is always a string that was defined in our enum definition.</span>
+        <span class="c1"># In this case, it can be &#39;0&#39;, &#39;1&#39;, or &#39;2&#39;.</span>
+        <span class="c1"># Here we just turn it into an integer and return the result.</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="c1"># Next, interpret the functions by defining method &#39;eval_YYY&#39; for each function named YYY</span>
+
+    <span class="k">def</span> <span class="nf">eval_const</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="c1"># The node argument is the corresponding AST node for the &quot;const&quot; application. In this example we don&#39;t need to look at it.</span>
+        <span class="c1"># The args argument is a list of values for the arguments of this &quot;const&quot; application.</span>
+        <span class="c1"># Since we have defined &quot;const&quot; as a unary function whose argument type is &quot;IntConst&quot;, here the length of args will always be 1.</span>
+        <span class="c1"># And args[0] will always be an integer, as in eval_IntConst we have interpreted all IntConsts as integers.</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">eval_plus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">eval_minus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">eval_mult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create the interpreter object and run it</span>
+<span class="n">interp</span> <span class="o">=</span> <span class="n">BinaryArithFuncInterpreter</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(@param 0)&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>    <span class="c1"># Prints 3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(const (IntConst 1))&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>  <span class="c1"># Prints 1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">from_sexp_string</span><span class="p">(</span><span class="s1">&#39;(plus (@param 1) (const (IntConst 2)))&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>  <span class="c1"># Prints 6</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">A Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_setup.html">Setting up a project</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Defining a DSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_synthesizer_basic.html">Basic Synthesizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_synthesizer_deduction.html">Deduction-based Synthesizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">A Tutorial</a><ul>
+      <li>Previous: <a href="00_setup.html" title="previous chapter">Setting up a project</a></li>
+      <li>Next: <a href="02_synthesizer_basic.html" title="next chapter">Basic Synthesizer</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/tutorial/01_language.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

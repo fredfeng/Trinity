@@ -1,0 +1,204 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.decider.test_assert_violation_handler &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tyrell.decider.test_assert_violation_handler</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">..spec</span> <span class="k">import</span> <span class="n">parse</span>
+<span class="kn">from</span> <span class="nn">..dsl</span> <span class="k">import</span> <span class="n">Builder</span>
+<span class="kn">from</span> <span class="nn">..interpreter</span> <span class="k">import</span> <span class="n">PostOrderInterpreter</span><span class="p">,</span> <span class="n">AssertionViolation</span>
+<span class="kn">from</span> <span class="nn">.assert_violation_handler</span> <span class="k">import</span> <span class="n">AssertionViolationHandler</span>
+<span class="kn">from</span> <span class="nn">.blame</span> <span class="k">import</span> <span class="n">Blame</span>
+
+<span class="n">spec_str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    enum SmallInt {</span>
+<span class="s1">        &quot;-3&quot;, &quot;-2&quot;, &quot;2&quot;, &quot;3&quot;</span>
+<span class="s1">    }</span>
+<span class="s1">    value IntExpr;</span>
+
+<span class="s1">    program Foo() -&gt; IntExpr;</span>
+<span class="s1">    func const: IntExpr -&gt; SmallInt;</span>
+<span class="s1">    func sqrt: IntExpr -&gt; SmallInt;</span>
+<span class="s1">    func id: IntExpr -&gt; IntExpr;</span>
+<span class="s1">    func idiv: IntExpr -&gt; IntExpr, SmallInt;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">spec</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">spec_str</span><span class="p">)</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">Builder</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FooInterpreter"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter">[docs]</a><span class="k">class</span> <span class="nc">FooInterpreter</span><span class="p">(</span><span class="n">PostOrderInterpreter</span><span class="p">):</span>
+<div class="viewcode-block" id="FooInterpreter.eval_SmallInt"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_SmallInt">[docs]</a>    <span class="k">def</span> <span class="nf">eval_SmallInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FooInterpreter.eval_const"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_const">[docs]</a>    <span class="k">def</span> <span class="nf">eval_const</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="FooInterpreter.eval_sqrt"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_sqrt">[docs]</a>    <span class="k">def</span> <span class="nf">eval_sqrt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertArg</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FooInterpreter.eval_idiv"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_idiv">[docs]</a>    <span class="k">def</span> <span class="nf">eval_idiv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertArg</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span>
+                       <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">cond</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                       <span class="n">capture_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="FooInterpreter.eval_id"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_id">[docs]</a>    <span class="k">def</span> <span class="nf">eval_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="TestTypeErrorHandler"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler">[docs]</a><span class="k">class</span> <span class="nc">TestTypeErrorHandler</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestTypeErrorHandler.test_blame"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame">[docs]</a>    <span class="k">def</span> <span class="nf">test_blame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">enode0</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;SmallInt&#39;</span><span class="p">,</span> <span class="s1">&#39;-3&#39;</span><span class="p">)</span>
+        <span class="n">enode1</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;SmallInt&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">)</span>
+        <span class="n">snode</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;sqrt&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">enode0</span><span class="p">])</span>
+        <span class="n">inode</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">snode</span><span class="p">])</span>
+
+        <span class="n">interp</span> <span class="o">=</span> <span class="n">FooInterpreter</span><span class="p">()</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">AssertionViolationHandler</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">interp</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">AssertionViolation</span><span class="p">)</span> <span class="k">as</span> <span class="n">cm</span><span class="p">:</span>
+            <span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">inode</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">type_error</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">exception</span>
+        <span class="n">blames</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">handle_interpreter_error</span><span class="p">(</span><span class="n">type_error</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">blames</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blames</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">blame</span> <span class="ow">in</span> <span class="n">blames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">inode</span><span class="p">,</span> <span class="n">inode</span><span class="o">.</span><span class="n">production</span><span class="p">),</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">snode</span><span class="p">,</span> <span class="n">snode</span><span class="o">.</span><span class="n">production</span><span class="p">),</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">enode0</span><span class="p">,</span> <span class="n">enode0</span><span class="o">.</span><span class="n">production</span><span class="p">)</span> <span class="ow">in</span> <span class="n">blame</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">enode0</span><span class="p">,</span> <span class="n">enode1</span><span class="o">.</span><span class="n">production</span><span class="p">)</span> <span class="ow">in</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestTypeErrorHandler.test_blame_with_capture"><a class="viewcode-back" href="../../../source/tyrell.decider.html#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame_with_capture">[docs]</a>    <span class="k">def</span> <span class="nf">test_blame_with_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">enode0</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;SmallInt&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">)</span>
+        <span class="n">cnode</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">enode0</span><span class="p">])</span>
+        <span class="n">enode1</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;SmallInt&#39;</span><span class="p">,</span> <span class="s1">&#39;-3&#39;</span><span class="p">)</span>
+        <span class="n">enode2</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_enum</span><span class="p">(</span><span class="s1">&#39;SmallInt&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+        <span class="n">dnode</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">make_apply</span><span class="p">(</span><span class="s1">&#39;idiv&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">cnode</span><span class="p">,</span> <span class="n">enode1</span><span class="p">])</span>
+
+        <span class="n">interp</span> <span class="o">=</span> <span class="n">FooInterpreter</span><span class="p">()</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">AssertionViolationHandler</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">interp</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">AssertionViolation</span><span class="p">)</span> <span class="k">as</span> <span class="n">cm</span><span class="p">:</span>
+            <span class="n">interp</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">dnode</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">type_error</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">exception</span>
+        <span class="n">blames</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">handle_interpreter_error</span><span class="p">(</span><span class="n">type_error</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">blames</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blames</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">blame</span> <span class="ow">in</span> <span class="n">blames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">dnode</span><span class="p">,</span> <span class="n">dnode</span><span class="o">.</span><span class="n">production</span><span class="p">),</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">enode1</span><span class="p">,</span> <span class="n">enode1</span><span class="o">.</span><span class="n">production</span><span class="p">)</span> <span class="ow">in</span> <span class="n">blame</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">enode1</span><span class="p">,</span> <span class="n">enode2</span><span class="o">.</span><span class="n">production</span><span class="p">)</span> <span class="ow">in</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1"># These nodes are captured in our assertion</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">cnode</span><span class="p">,</span> <span class="n">cnode</span><span class="o">.</span><span class="n">production</span><span class="p">),</span> <span class="n">blame</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">Blame</span><span class="p">(</span><span class="n">enode0</span><span class="p">,</span> <span class="n">enode0</span><span class="o">.</span><span class="n">production</span><span class="p">),</span> <span class="n">blame</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Tyrell Source Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

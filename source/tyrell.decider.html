@@ -1,0 +1,648 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tyrell.decider package &#8212; Tyrell 0.1dev documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tyrell.dsl package" href="tyrell.dsl.html" />
+    <link rel="prev" title="tyrell package" href="tyrell.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tyrell-decider-package">
+<h1>tyrell.decider package<a class="headerlink" href="#tyrell-decider-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tyrell.decider.assert_violation_handler">
+<span id="tyrell-decider-assert-violation-handler-module"></span><h2>tyrell.decider.assert_violation_handler module<a class="headerlink" href="#module-tyrell.decider.assert_violation_handler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.assert_violation_handler.AssertionViolationHandler">
+<em class="property">class </em><code class="descclassname">tyrell.decider.assert_violation_handler.</code><code class="descname">AssertionViolationHandler</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec</em>, <em>interpreter: tyrell.interpreter.interpreter.Interpreter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/assert_violation_handler.html#AssertionViolationHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.assert_violation_handler.AssertionViolationHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Automatically compute blames for dynamic type errors</p>
+<dl class="method">
+<dt id="tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_assertion_violation">
+<code class="descname">handle_assertion_violation</code><span class="sig-paren">(</span><em>error: tyrell.interpreter.error.AssertionViolation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/assert_violation_handler.html#AssertionViolationHandler.handle_assertion_violation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_assertion_violation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_interpreter_error">
+<code class="descname">handle_interpreter_error</code><span class="sig-paren">(</span><em>error: tyrell.interpreter.error.InterpreterError</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/assert_violation_handler.html#AssertionViolationHandler.handle_interpreter_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.assert_violation_handler.AssertionViolationHandler.handle_interpreter_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.blame">
+<span id="tyrell-decider-blame-module"></span><h2>tyrell.decider.blame module<a class="headerlink" href="#module-tyrell.decider.blame" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.blame.Blame">
+<em class="property">class </em><code class="descclassname">tyrell.decider.blame.</code><code class="descname">Blame</code><span class="sig-paren">(</span><em>node</em>, <em>production</em><span class="sig-paren">)</span><a class="headerlink" href="#tyrell.decider.blame.Blame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.decider.blame.Blame.node">
+<code class="descname">node</code><a class="headerlink" href="#tyrell.decider.blame.Blame.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.decider.blame.Blame.production">
+<code class="descname">production</code><a class="headerlink" href="#tyrell.decider.blame.Blame.production" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.decider.blame.print_blame">
+<code class="descclassname">tyrell.decider.blame.</code><code class="descname">print_blame</code><span class="sig-paren">(</span><em>blame: tyrell.decider.blame.Blame</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/tyrell/decider/blame.html#print_blame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.blame.print_blame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.decider">
+<span id="tyrell-decider-decider-module"></span><h2>tyrell.decider.decider module<a class="headerlink" href="#module-tyrell.decider.decider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.decider.Decider">
+<em class="property">class </em><code class="descclassname">tyrell.decider.decider.</code><code class="descname">Decider</code><a class="reference internal" href="../_modules/tyrell/decider/decider.html#Decider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.decider.Decider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.decider.Decider.analyze">
+<code class="descname">analyze</code><span class="sig-paren">(</span><em>ast: tyrell.dsl.node.Node</em><span class="sig-paren">)</span> &#x2192; tyrell.decider.result.Result<a class="reference internal" href="../_modules/tyrell/decider/decider.html#Decider.analyze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.decider.Decider.analyze" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main API of this class.
+It is expected to analyze the given AST and check if it is valid. If not, optionally returns why, which is used to update the enumerator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.decider.Decider.analyze_interpreter_error">
+<code class="descname">analyze_interpreter_error</code><span class="sig-paren">(</span><em>error: tyrell.interpreter.error.InterpreterError</em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/tyrell/decider/decider.html#Decider.analyze_interpreter_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.decider.Decider.analyze_interpreter_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take an interpreter error and return a data structure that can be used to update the enumerator.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.eval_expr">
+<span id="tyrell-decider-eval-expr-module"></span><h2>tyrell.decider.eval_expr module<a class="headerlink" href="#module-tyrell.decider.eval_expr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.eval_expr.ExprVisitor">
+<em class="property">class </em><code class="descclassname">tyrell.decider.eval_expr.</code><code class="descname">ExprVisitor</code><span class="sig-paren">(</span><em>interp: tyrell.interpreter.interpreter.Interpreter, in_values: List[Any], out_value: Any</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.html#tyrell.visitor.GenericVisitor" title="tyrell.visitor.GenericVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.visitor.GenericVisitor</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_binary_expr">
+<code class="descname">visit_binary_expr</code><span class="sig-paren">(</span><em>binary_expr: tyrell.spec.expr.BinaryExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_binary_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_binary_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_cond_expr">
+<code class="descname">visit_cond_expr</code><span class="sig-paren">(</span><em>cond_expr: tyrell.spec.expr.CondExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_cond_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_cond_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_const_expr">
+<code class="descname">visit_const_expr</code><span class="sig-paren">(</span><em>const_expr: tyrell.spec.expr.ConstExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_const_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_const_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_param_expr">
+<code class="descname">visit_param_expr</code><span class="sig-paren">(</span><em>param_expr: tyrell.spec.expr.ParamExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_param_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_param_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_property_expr">
+<code class="descname">visit_property_expr</code><span class="sig-paren">(</span><em>prop_expr: tyrell.spec.expr.PropertyExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_property_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_property_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.eval_expr.ExprVisitor.visit_unary_expr">
+<code class="descname">visit_unary_expr</code><span class="sig-paren">(</span><em>unary_expr: tyrell.spec.expr.UnaryExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#ExprVisitor.visit_unary_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.ExprVisitor.visit_unary_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.decider.eval_expr.eval_expr">
+<code class="descclassname">tyrell.decider.eval_expr.</code><code class="descname">eval_expr</code><span class="sig-paren">(</span><em>interpreter: tyrell.interpreter.interpreter.Interpreter, in_values: List[Any], out_value: Any, expr: tyrell.spec.expr.Expr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/eval_expr.html#eval_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.eval_expr.eval_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.example_base">
+<span id="tyrell-decider-example-base-module"></span><h2>tyrell.decider.example_base module<a class="headerlink" href="#module-tyrell.decider.example_base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.example_base.Example">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_base.</code><code class="descname">Example</code><span class="sig-paren">(</span><em>input</em>, <em>output</em><span class="sig-paren">)</span><a class="headerlink" href="#tyrell.decider.example_base.Example" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="tyrell.decider.example_base.Example.input">
+<code class="descname">input</code><a class="headerlink" href="#tyrell.decider.example_base.Example.input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.decider.example_base.Example.output">
+<code class="descname">output</code><a class="headerlink" href="#tyrell.decider.example_base.Example.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.example_base.ExampleDecider">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_base.</code><code class="descname">ExampleDecider</code><span class="sig-paren">(</span><em>interpreter: tyrell.interpreter.interpreter.Interpreter, examples: List[tyrell.decider.example_base.Example], equal_output: Callable[[Any, Any], bool] = &lt;function ExampleDecider.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_base.html#ExampleDecider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_base.ExampleDecider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.decider.decider.Decider" title="tyrell.decider.decider.Decider"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.decider.decider.Decider</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.example_base.ExampleDecider.analyze">
+<code class="descname">analyze</code><span class="sig-paren">(</span><em>prog</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_base.html#ExampleDecider.analyze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_base.ExampleDecider.analyze" title="Permalink to this definition">¶</a></dt>
+<dd><p>This basic version of analyze() merely interpret the AST and see if it conforms to our examples</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_base.ExampleDecider.get_failed_examples">
+<code class="descname">get_failed_examples</code><span class="sig-paren">(</span><em>prog</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_base.html#ExampleDecider.get_failed_examples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_base.ExampleDecider.get_failed_examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test the program on all examples provided.
+Return a list of failed examples.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_base.ExampleDecider.has_failed_examples">
+<code class="descname">has_failed_examples</code><span class="sig-paren">(</span><em>prog</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_base.html#ExampleDecider.has_failed_examples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_base.ExampleDecider.has_failed_examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the given program would fail on any of the examples provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tyrell.decider.example_base.ExampleDecider.interpreter">
+<code class="descname">interpreter</code><a class="headerlink" href="#tyrell.decider.example_base.ExampleDecider.interpreter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.example_constraint">
+<span id="tyrell-decider-example-constraint-module"></span><h2>tyrell.decider.example_constraint module<a class="headerlink" href="#module-tyrell.decider.example_constraint" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.example_constraint.BlameFinder">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_constraint.</code><code class="descname">BlameFinder</code><span class="sig-paren">(</span><em>interp: tyrell.interpreter.interpreter.Interpreter, imply_map: Mapping[Tuple[tyrell.spec.production.Production, tyrell.spec.expr.Expr], List[tyrell.spec.production.Production]], prog: tyrell.dsl.node.Node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#BlameFinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.BlameFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.BlameFinder.get_blames">
+<code class="descname">get_blames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[List[tyrell.decider.blame.Blame]]<a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#BlameFinder.get_blames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.BlameFinder.get_blames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.BlameFinder.process_example">
+<code class="descname">process_example</code><span class="sig-paren">(</span><em>example: tyrell.decider.example_base.Example</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#BlameFinder.process_example"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.BlameFinder.process_example" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.BlameFinder.process_examples">
+<code class="descname">process_examples</code><span class="sig-paren">(</span><em>examples: List[tyrell.decider.example_base.Example]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#BlameFinder.process_examples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.BlameFinder.process_examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_constraint.</code><code class="descname">ConstraintVisitor</code><span class="sig-paren">(</span><em>encode_property: Callable[[tyrell.spec.expr.PropertyExpr], z3.z3.ExprRef]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.html#tyrell.visitor.GenericVisitor" title="tyrell.visitor.GenericVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.visitor.GenericVisitor</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor.visit_binary_expr">
+<code class="descname">visit_binary_expr</code><span class="sig-paren">(</span><em>binary_expr: tyrell.spec.expr.BinaryExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor.visit_binary_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor.visit_binary_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor.visit_cond_expr">
+<code class="descname">visit_cond_expr</code><span class="sig-paren">(</span><em>cond_expr: tyrell.spec.expr.CondExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor.visit_cond_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor.visit_cond_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor.visit_const_expr">
+<code class="descname">visit_const_expr</code><span class="sig-paren">(</span><em>const_expr: tyrell.spec.expr.ConstExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor.visit_const_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor.visit_const_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor.visit_property_expr">
+<code class="descname">visit_property_expr</code><span class="sig-paren">(</span><em>prop_expr: tyrell.spec.expr.PropertyExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor.visit_property_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor.visit_property_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ConstraintVisitor.visit_unary_expr">
+<code class="descname">visit_unary_expr</code><span class="sig-paren">(</span><em>unary_expr: tyrell.spec.expr.UnaryExpr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ConstraintVisitor.visit_unary_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ConstraintVisitor.visit_unary_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.example_constraint.ExampleConstraintDecider">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_constraint.</code><code class="descname">ExampleConstraintDecider</code><span class="sig-paren">(</span><em>spec: tyrell.spec.spec.TyrellSpec, interpreter: tyrell.interpreter.interpreter.Interpreter, examples: List[tyrell.decider.example_base.Example], equal_output: Callable[[Any, Any], bool] = &lt;function ExampleConstraintDecider.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ExampleConstraintDecider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ExampleConstraintDecider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.decider.example_base.ExampleDecider" title="tyrell.decider.example_base.ExampleDecider"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.decider.example_base.ExampleDecider</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ExampleConstraintDecider.analyze">
+<code class="descname">analyze</code><span class="sig-paren">(</span><em>prog</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ExampleConstraintDecider.analyze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ExampleConstraintDecider.analyze" title="Permalink to this definition">¶</a></dt>
+<dd><p>This version of analyze() tries to analyze the reason why a synthesized program fails, if it does not pass all the tests.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.ExampleConstraintDecider.analyze_interpreter_error">
+<code class="descname">analyze_interpreter_error</code><span class="sig-paren">(</span><em>error: tyrell.interpreter.error.InterpreterError</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#ExampleConstraintDecider.analyze_interpreter_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.ExampleConstraintDecider.analyze_interpreter_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take an interpreter error and return a data structure that can be used to update the enumerator.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.example_constraint.Z3Encoder">
+<em class="property">class </em><code class="descclassname">tyrell.decider.example_constraint.</code><code class="descname">Z3Encoder</code><span class="sig-paren">(</span><em>interp: tyrell.interpreter.interpreter.Interpreter</em>, <em>indexer: tyrell.dsl.indexer.NodeIndexer</em>, <em>example: tyrell.decider.example_base.Example</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.html#tyrell.visitor.GenericVisitor" title="tyrell.visitor.GenericVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.visitor.GenericVisitor</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.encode_output_alignment">
+<code class="descname">encode_output_alignment</code><span class="sig-paren">(</span><em>prog: tyrell.dsl.node.Node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.encode_output_alignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.encode_output_alignment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.encode_param_alignment">
+<code class="descname">encode_param_alignment</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em>, <em>ty: tyrell.spec.type.ValueType</em>, <em>index: int</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.encode_param_alignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.encode_param_alignment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.get_blame_nodes">
+<code class="descname">get_blame_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.get_blame_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.get_blame_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.get_z3_var">
+<code class="descname">get_z3_var</code><span class="sig-paren">(</span><em>node: tyrell.dsl.node.Node</em>, <em>pname: str</em>, <em>ptype: tyrell.spec.expr.ExprType</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.get_z3_var"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.get_z3_var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.visit_apply_node">
+<code class="descname">visit_apply_node</code><span class="sig-paren">(</span><em>apply_node: tyrell.dsl.node.ApplyNode</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.visit_apply_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.visit_apply_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.visit_atom_node">
+<code class="descname">visit_atom_node</code><span class="sig-paren">(</span><em>atom_node: tyrell.dsl.node.AtomNode</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.visit_atom_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.visit_atom_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.example_constraint.Z3Encoder.visit_param_node">
+<code class="descname">visit_param_node</code><span class="sig-paren">(</span><em>param_node: tyrell.dsl.node.ParamNode</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/example_constraint.html#Z3Encoder.visit_param_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.example_constraint.Z3Encoder.visit_param_node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.result">
+<span id="tyrell-decider-result-module"></span><h2>tyrell.decider.result module<a class="headerlink" href="#module-tyrell.decider.result" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.result.BadResult">
+<em class="property">class </em><code class="descclassname">tyrell.decider.result.</code><code class="descname">BadResult</code><span class="sig-paren">(</span><em>why</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/result.html#BadResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.BadResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.decider.result.Result" title="tyrell.decider.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.decider.result.Result</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.result.BadResult.is_ok">
+<code class="descname">is_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/decider/result.html#BadResult.is_ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.BadResult.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.result.BadResult.why">
+<code class="descname">why</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/result.html#BadResult.why"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.BadResult.why" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.result.OkResult">
+<em class="property">class </em><code class="descclassname">tyrell.decider.result.</code><code class="descname">OkResult</code><a class="reference internal" href="../_modules/tyrell/decider/result.html#OkResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.OkResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tyrell.decider.result.Result" title="tyrell.decider.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.decider.result.Result</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.result.OkResult.is_ok">
+<code class="descname">is_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/decider/result.html#OkResult.is_ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.OkResult.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.result.OkResult.why">
+<code class="descname">why</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/result.html#OkResult.why"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.OkResult.why" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.result.Result">
+<em class="property">class </em><code class="descclassname">tyrell.decider.result.</code><code class="descname">Result</code><a class="reference internal" href="../_modules/tyrell/decider/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.result.Result.is_bad">
+<code class="descname">is_bad</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/decider/result.html#Result.is_bad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.Result.is_bad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.result.Result.is_ok">
+<code class="descname">is_ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/tyrell/decider/result.html#Result.is_ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.Result.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.result.Result.why">
+<code class="descname">why</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/tyrell/decider/result.html#Result.why"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.Result.why" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tyrell.decider.result.bad">
+<code class="descclassname">tyrell.decider.result.</code><code class="descname">bad</code><span class="sig-paren">(</span><em>why=None</em><span class="sig-paren">)</span> &#x2192; tyrell.decider.result.BadResult<a class="reference internal" href="../_modules/tyrell/decider/result.html#bad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.bad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tyrell.decider.result.ok">
+<code class="descclassname">tyrell.decider.result.</code><code class="descname">ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; tyrell.decider.result.OkResult<a class="reference internal" href="../_modules/tyrell/decider/result.html#ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.result.ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.test_assert_violation_handler">
+<span id="tyrell-decider-test-assert-violation-handler-module"></span><h2>tyrell.decider.test_assert_violation_handler module<a class="headerlink" href="#module-tyrell.decider.test_assert_violation_handler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_assert_violation_handler.</code><code class="descname">FooInterpreter</code><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.interpreter.html#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.post_order.PostOrderInterpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_SmallInt">
+<code class="descname">eval_SmallInt</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter.eval_SmallInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_SmallInt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_const">
+<code class="descname">eval_const</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter.eval_const"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_const" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_id">
+<code class="descname">eval_id</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter.eval_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_idiv">
+<code class="descname">eval_idiv</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter.eval_idiv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_idiv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_sqrt">
+<code class="descname">eval_sqrt</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#FooInterpreter.eval_sqrt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.FooInterpreter.eval_sqrt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_assert_violation_handler.</code><code class="descname">TestTypeErrorHandler</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#TestTypeErrorHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame">
+<code class="descname">test_blame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#TestTypeErrorHandler.test_blame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame_with_capture">
+<code class="descname">test_blame_with_capture</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_assert_violation_handler.html#TestTypeErrorHandler.test_blame_with_capture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_assert_violation_handler.TestTypeErrorHandler.test_blame_with_capture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.test_eval_expr">
+<span id="tyrell-decider-test-eval-expr-module"></span><h2>tyrell.decider.test_eval_expr module<a class="headerlink" href="#module-tyrell.decider.test_eval_expr" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.test_eval_expr.FooInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_eval_expr.</code><code class="descname">FooInterpreter</code><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#FooInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.FooInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.interpreter.html#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.post_order.PostOrderInterpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.test_eval_expr.FooInterpreter.apply_bprop">
+<code class="descname">apply_bprop</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#FooInterpreter.apply_bprop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.FooInterpreter.apply_bprop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_eval_expr.FooInterpreter.apply_iprop">
+<code class="descname">apply_iprop</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#FooInterpreter.apply_iprop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.FooInterpreter.apply_iprop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_eval_expr.FooInterpreter.eval_foo">
+<code class="descname">eval_foo</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#FooInterpreter.eval_foo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.FooInterpreter.eval_foo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.test_eval_expr.TestEvalExpr">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_eval_expr.</code><code class="descname">TestEvalExpr</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#TestEvalExpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.TestEvalExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.test_eval_expr.TestEvalExpr.test_eval_expr">
+<code class="descname">test_eval_expr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_eval_expr.html#TestEvalExpr.test_eval_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_eval_expr.TestEvalExpr.test_eval_expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.test_example">
+<span id="tyrell-decider-test-example-module"></span><h2>tyrell.decider.test_example module<a class="headerlink" href="#module-tyrell.decider.test_example" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.test_example.FooInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_example.</code><code class="descname">FooInterpreter</code><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#FooInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.FooInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.interpreter.html#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.post_order.PostOrderInterpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.test_example.FooInterpreter.eval_mult">
+<code class="descname">eval_mult</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#FooInterpreter.eval_mult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.FooInterpreter.eval_mult" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example.FooInterpreter.eval_plus">
+<code class="descname">eval_plus</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#FooInterpreter.eval_plus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.FooInterpreter.eval_plus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.test_example.TestExample">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_example.</code><code class="descname">TestExample</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#TestExample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.TestExample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="tyrell.decider.test_example.TestExample.test_analyze">
+<code class="descname">test_analyze</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#TestExample.test_analyze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.TestExample.test_analyze" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example.TestExample.test_custom_equal">
+<code class="descname">test_custom_equal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example.html#TestExample.test_custom_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example.TestExample.test_custom_equal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider.test_example_constraint">
+<span id="tyrell-decider-test-example-constraint-module"></span><h2>tyrell.decider.test_example_constraint module<a class="headerlink" href="#module-tyrell.decider.test_example_constraint" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="tyrell.decider.test_example_constraint.FooInterpreter">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_example_constraint.</code><code class="descname">FooInterpreter</code><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#FooInterpreter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.FooInterpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tyrell.interpreter.html#tyrell.interpreter.post_order.PostOrderInterpreter" title="tyrell.interpreter.post_order.PostOrderInterpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">tyrell.interpreter.post_order.PostOrderInterpreter</span></code></a></p>
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.FooInterpreter.apply_neg">
+<code class="descname">apply_neg</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#FooInterpreter.apply_neg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.FooInterpreter.apply_neg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.FooInterpreter.apply_pos">
+<code class="descname">apply_pos</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#FooInterpreter.apply_pos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.FooInterpreter.apply_pos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.FooInterpreter.eval_div">
+<code class="descname">eval_div</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#FooInterpreter.eval_div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.FooInterpreter.eval_div" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.FooInterpreter.eval_mult">
+<code class="descname">eval_mult</code><span class="sig-paren">(</span><em>node</em>, <em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#FooInterpreter.eval_mult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.FooInterpreter.eval_mult" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint">
+<em class="property">class </em><code class="descclassname">tyrell.decider.test_example_constraint.</code><code class="descname">TestExampleConstraint</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="staticmethod">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint.do_analyze">
+<em class="property">static </em><code class="descname">do_analyze</code><span class="sig-paren">(</span><em>prog</em>, <em>examples</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint.do_analyze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint.do_analyze" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint.test_satisfied_abstract">
+<code class="descname">test_satisfied_abstract</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint.test_satisfied_abstract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint.test_satisfied_abstract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint.test_satisfied_concrete">
+<code class="descname">test_satisfied_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint.test_satisfied_concrete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint.test_satisfied_concrete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint.test_violated_abstract">
+<code class="descname">test_violated_abstract</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint.test_violated_abstract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint.test_violated_abstract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tyrell.decider.test_example_constraint.TestExampleConstraint.test_violated_abstract2">
+<code class="descname">test_violated_abstract2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tyrell/decider/test_example_constraint.html#TestExampleConstraint.test_violated_abstract2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tyrell.decider.test_example_constraint.TestExampleConstraint.test_violated_abstract2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tyrell.decider">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tyrell.decider" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Tyrell</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">A Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Tyrell Source Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tyrell.html">tyrell package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">Tyrell Source Documentation</a><ul>
+  <li><a href="tyrell.html">tyrell package</a><ul>
+      <li>Previous: <a href="tyrell.html" title="previous chapter">tyrell package</a></li>
+      <li>Next: <a href="tyrell.dsl.html" title="next chapter">tyrell.dsl package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/tyrell.decider.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
