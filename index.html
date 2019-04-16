@@ -1,125 +1,107 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome to Tyrell’s documentation! &#8212; Tyrell 0.1dev documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A Tutorial" href="tutorial/index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <meta charset="UTF-8">
+    <title>Trinity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Trinity</h1>
+      <h2 class="project-tagline">An Extensible Synthesis Framework for Data Science</h2>
+      <a href="https://github.com/fredfeng/Trinity" class="btn">Try Trinity</a>
+    </section>
+
+
+    <section class="main-content">
+      <h3>
+<a id="trinity" class="anchor" href="#trinity" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h3>
+
+<p>
+  Trinity is a general-purpose framework that can be used to quickly build domain-specific program 
+  synthesizers for automating many tedious tasks that arise in data science. 
+</p>
+<embed src="media/overview.pdf" width="500" height="335" 
+ type="application/pdf">
+
+<p><b>End-user</b> 
+From the perspective of end-users, Trinity provides a rich PBE environment that can be used to 
+automate various tasks that arise in data science. In particular, current synthesizers in 
+Trinity can generate list and table transformations, SQL queries, and programs that consolidate 
+values from different sources. To perform a synthesis task, the end-user specifies her intent by 
+using input-output examples. Additionally, the user can (optionally) also specify so-called 
+<em>preference predicates</em> that introduce inductive bias to the synthesizer. For example, 
+if the user thinks that the synthesized program should  contain the <em>concat</em> function for 
+concatenating two strings, she can provide this information to Trinity by adding a predicate 
+like <em>occurs(concat, 80%)</em>, where 80% indicates the user's confidence that the target 
+program will contain the <em>concat</em> function. Given such a predicate, Trinity will bias its 
+search towards programs that contain at least one occurrence of the <em>concat</em> operator.
+</p>
+
+<p>
+<b>Advanced user</b>
+From the perspective of an advanced user (or domain expert), Trinity can be used to  build new 
+synthesizers or extend  functionality of existing synthesizers. For example, to build a new 
+synthesizer on top of Trinity, the domain expert only needs to provide a domain-specific 
+language (DSL) that  is suitable for the target class of tasks.
+In addition to the syntax of the DSL and its interpreter, the user can also provide logical 
+specifications for the DSL constructs in order to speed up synthesis. However, these logical 
+specifications need not precisely specify the semantics of the DSL construct. For example, 
+consider the <em>concat</em> operator that concatenates two strings <em>a</em> and <em>b</em> 
+and returns a string <em>c</em>. We can encode the semantics of this operator using the logical 
+specification <em>len(c)=len(a)+len(b)</em>, where <em>len</em> denotes the length of the string. 
+Note that this specification gives a partial rather than complete description of what the 
+<em>concat</em> operator does. Internally, Trinity's synthesis algorithm uses such 
+specifications to dramatically prune the search space of possible programs.
+</p>
+
+<p>
+<b>Synthesis expert</b>:
+For users with some knowledge of program synthesis, Trinity's synthesis engine can be 
+customized to more efficiently search for programs that satisfy the user-provided examples. 
+At its core, Trinity's synthesis algorithm performs backtracking search over DSL programs 
+but leverages program semantics to significantly prune the search space. Furthermore, 
+the search algorithm in Trinity is <em>conflict-driven</em> in that it can learn 
+useful "lemmas" based on failed synthesis attempts (i.e., conflicts). 
+An advanced user with some knowledge of program synthesis can further customize the 
+underlying algorithm in Trinity by either changing its search strategy or by 
+integrating a statistical model into the enumeration engine.
+</p>
+
+<!--h3>
+<a id="doc" class="anchor" href="#doc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h3>
+
+<p>TBD.</p-->
+
+<h3>
+<a id="technical-report" class="anchor" href="#tutorial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tutorial</h3>
+
+<p>
+Check out a <a href="dev/index.html">tutorial</a> written by Jia Chen.
+</p>
+
+<h3>
+<a id="video" class="anchor" href="#video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Video</h3>
+
+<p>Check out our video made by Ruben Martins.</p>
+<video width="612" height="400" controls>
+  <source src="media/vldb19-demo.mov" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">Trinity is maintained by <a href="https://www.cs.utexas.edu/~rmartins/">Ruben Martins</a>, Jia Chen, and <a href="http://www.cs.utexas.edu/~yufeng/">Yu Feng</a>.</span>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
-
-          <div class="body" role="main">
-            
-  <div class="section" id="welcome-to-tyrell-s-documentation">
-<h1>Welcome to Tyrell’s documentation!<a class="headerlink" href="#welcome-to-tyrell-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">A Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/00_setup.html">Setting up a project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/01_language.html">Defining a DSL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/02_synthesizer_basic.html">Basic Synthesizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/03_synthesizer_deduction.html">Deduction-based Synthesizer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">Tyrell Source Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/tyrell.html">tyrell package</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-
-
-          </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">Tyrell</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">A Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">Tyrell Source Documentation</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="tutorial/index.html" title="next chapter">A Tutorial</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2019, Jia Chen, Yu Feng, Ruben Martins.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
   </body>
 </html>
+
