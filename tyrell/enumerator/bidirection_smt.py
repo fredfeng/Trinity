@@ -1,7 +1,6 @@
 from z3 import *
 from collections import deque
 from .enumerator import Enumerator
-from .optimizer import Optimizer
 
 from .. import dsl as D
 from ..logger import get_logger
@@ -176,49 +175,6 @@ class BidirectEnumerator(Enumerator):
                     index, pred.name)
                 raise ValueError(msg)
 
-    def _resolve_occurs_predicate(self, pred):
-        self._check_arg_types(pred, [str, (int, float)])
-        prod = self.spec.get_function_production_or_raise(pred.args[0])
-        weight = pred.args[1]
-        self.optimizer.mk_occurs(prod, weight)
-
-    def _resolve_not_occurs_predicate(self, pred):
-        self._check_arg_types(pred, [str, (int, float)])
-        prod = self.spec.get_function_production_or_raise(pred.args[0])
-        weight = pred.args[1]
-        self.optimizer.mk_not_occurs(prod, weight)
-
-    def _resolve_is_not_parent_predicate(self, pred):
-        self._check_arg_types(pred, [str, str, (int, float)])
-        prod0 = self.spec.get_function_production_or_raise(pred.args[0])
-        prod1 = self.spec.get_function_production_or_raise(pred.args[1])
-        weight = pred.args[2]
-        self.optimizer.mk_is_not_parent(prod0, prod1, weight)
-
-    def _resolve_is_parent_predicate(self, pred):
-        self._check_arg_types(pred, [str, str, (int, float)])
-        prod0 = self.spec.get_function_production_or_raise(pred.args[0])
-        prod1 = self.spec.get_function_production_or_raise(pred.args[1])
-        weight = pred.args[2]
-        self.optimizer.mk_is_parent(prod0, prod1, weight)
-
-    def resolve_predicates(self):
-        try:
-            for pred in self.spec.predicates():
-                if pred.name == 'occurs':
-                    self._resolve_occurs_predicate(pred)
-                elif pred.name == 'is_parent':
-                    self._resolve_is_parent_predicate(pred)
-                elif pred.name == 'not_occurs':
-                    self._resolve_not_occurs_predicate(pred)
-                elif pred.name == 'is_not_parent':
-                    self._resolve_is_not_parent_predicate(pred)
-                else:
-                    logger.warning('Predicate not handled: {}'.format(pred))
-        except (KeyError, ValueError) as e:
-            msg = 'Failed to resolve predicates. {}'.format(e)
-            raise RuntimeError(msg) from None
-
     def __init__(self, spec, depth=None, loc=None):
         self.z3_solver = Solver()
         self.leaf_productions = []
@@ -245,9 +201,6 @@ class BidirectEnumerator(Enumerator):
         self.createFunctionConstraints(self.z3_solver)
         self.createLeafConstraints(self.z3_solver)
         self.createChildrenConstraints(self.z3_solver)
-        self.optimizer = Optimizer(
-            self.z3_solver, spec, self.variables, self.nodes)
-        self.resolve_predicates()
 
     def blockModel(self):
         assert(self.model is not None)
@@ -311,7 +264,12 @@ class BidirectEnumerator(Enumerator):
 
     def next(self):
         while True:
-            self.model = self.optimizer.optimize(self.z3_solver)
+            res = self.z3_solver.check()
+            if res == sat:
+                self.model = self.z3_solver.model()
+            else: 
+                self.model = None
+
             if self.model is not None:
                 return self.buildProgram()
             else:
