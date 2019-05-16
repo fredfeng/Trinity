@@ -23,7 +23,7 @@ class ASTNode:
 
 
 # FIXME: Currently this enumerator requires an "Empty" production to function properly
-class SmtEnumerator(Enumerator):
+class BidirectEnumerator(Enumerator):
     # z3 solver
     z3_solver = Solver()
 

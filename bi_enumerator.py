@@ -3,7 +3,7 @@
 import argparse
 import tyrell.spec as S
 from tyrell.interpreter import PostOrderInterpreter, GeneralError
-from tyrell.enumerator import SmtEnumerator
+from tyrell.enumerator import BidirectEnumerator
 from tyrell.decider import Example, BidirectionalDecider
 from tyrell.synthesizer import Synthesizer
 from tyrell.logger import get_logger
@@ -346,12 +346,11 @@ def main():
     logger.info('Building synthesizer...')
     synthesizer = Synthesizer(
         #loc: # of function productions
-        enumerator=SmtEnumerator(spec, depth=depth_val, loc=loc_val),
-        decider=ExampleConstraintPruningDecider(
+        enumerator=BidirectEnumerator(spec, depth=depth_val, loc=loc_val),
+        decider=BidirectionalDecider(
             spec=spec,
             interpreter=MorpheusInterpreter(),
             examples=[
-                # Example(input=[DataFrame2(benchmark1_input)], output=benchmark1_output),
                 Example(input=['input0'], output='output'),
             ],
             equal_output=eq_r
