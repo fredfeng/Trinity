@@ -15,7 +15,7 @@ from ..logger import get_logger
 from ..spec.expr import *
 from ..visitor import GenericVisitor
 
-logger = get_logger('tyrell.decider.example_constraint_pruning')
+logger = get_logger('tyrell.decider.bidirection_pruning')
 
 
 class Z3Encoder(GenericVisitor):

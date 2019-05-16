@@ -5,7 +5,7 @@ from .enumerator import Enumerator
 from .. import dsl as D
 from ..logger import get_logger
 
-logger = get_logger('tyrell.enumerator.smt')
+logger = get_logger('tyrell.enumerator.bidirection_smt')
 
 
 class AST:
@@ -161,6 +161,7 @@ class BidirectEnumerator(Enumerator):
                 current.children.append(c)
                 if c.depth < depth:
                     d.append(c)
+    
         return tree, nodes
 
     @staticmethod
@@ -264,11 +265,10 @@ class BidirectEnumerator(Enumerator):
 
     def next(self):
         while True:
+            self.model = None
             res = self.z3_solver.check()
             if res == sat:
                 self.model = self.z3_solver.model()
-            else: 
-                self.model = None
 
             if self.model is not None:
                 return self.buildProgram()
