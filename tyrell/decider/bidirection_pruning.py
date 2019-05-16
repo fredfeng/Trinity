@@ -275,7 +275,7 @@ class BlameFinder:
             return equal_output(interpreter_output, example.output)
 
 
-class ExampleConstraintPruningDecider(ExampleDecider):
+class BidirectionalDecider(ExampleDecider):
     assert_handler: AssertionViolationHandler
 
     def __init__(self,

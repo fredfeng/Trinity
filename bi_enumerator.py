@@ -4,7 +4,7 @@ import argparse
 import tyrell.spec as S
 from tyrell.interpreter import PostOrderInterpreter, GeneralError
 from tyrell.enumerator import SmtEnumerator
-from tyrell.decider import Example, ExampleConstraintPruningDecider
+from tyrell.decider import Example, BidirectionalDecider
 from tyrell.synthesizer import Synthesizer
 from tyrell.logger import get_logger
 import rpy2.robjects as robjects
