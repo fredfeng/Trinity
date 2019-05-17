@@ -1,4 +1,4 @@
-start: type_decls program_decl func_decls global_preds
+start: type_decls program_decl func_decls inv_decls global_preds
 
 type_decls: type_decl*
 
@@ -28,7 +28,11 @@ program_decl: "program" func_name "(" type_names ")" "->" type_name ";"
 
 func_decls: func_decl*
 
+inv_decls: inv_decl*
+
 func_decl: "func" func_name ":" func_body func_constraints
+
+inv_decl: "inv" func_name ":" func_body func_constraints
 
 func_body: func_lhs "->" func_rhss
 

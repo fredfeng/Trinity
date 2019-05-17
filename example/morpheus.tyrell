@@ -92,3 +92,6 @@ func inner_join: Table r -> Table a, Table b {
   col(r) < col(a) + col(b);
 }
 
+inv inner_join: Table r -> Table a, Table b {
+  col(r) < col(a) + col(b);
+}
