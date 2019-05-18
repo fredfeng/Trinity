@@ -164,18 +164,6 @@ class BidirectEnumerator(Enumerator):
     
         return tree, nodes
 
-    @staticmethod
-    def _check_arg_types(pred, python_tys):
-        if pred.num_args() < len(python_tys):
-            msg = 'Predicate "{}" must have at least {} arugments. Only {} is found.'.format(
-                pred.name, len(python_tys), pred.num_args())
-            raise ValueError(msg)
-        for index, (arg, python_ty) in enumerate(zip(pred.args, python_tys)):
-            if not isinstance(arg, python_ty):
-                msg = 'Argument {} of predicate {} has unexpected type.'.format(
-                    index, pred.name)
-                raise ValueError(msg)
-
     def __init__(self, spec, depth=None, loc=None):
         self.z3_solver = Solver()
         self.leaf_productions = []
