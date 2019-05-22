@@ -65,7 +65,7 @@ class BidirectEnumerator(Enumerator):
             self.z3_solver.add(ctr_opcode)
 
             # All vars defined beforehand.
-            def_vars = list(map(lambda x: x.lhs, self.lines[:i_loc])
+            def_vars = list(map(lambda x: x.lhs, self.lines[:i_loc]))
 
             # Each opcode will enforce constraints to its children
             for i in range(0, self.max_children):
@@ -75,7 +75,7 @@ class BidirectEnumerator(Enumerator):
                     if i < len(p.rhs):
                         child_type = str(p.rhs[i])
                         child_prods = self.spec.get_productions_with_lhs(child_type)
-                        child_prods = list(map(lambda y: y.id (filter(lambda x: (not x.is_function()), child_prods))))
+                        child_prods=list(o.id for o in filter(lambda x: (not x.is_function()), child_prods))
                         if child_type == st.type:
                             child_prods = child_prods + def_vars
                         ctr_arg = reduce(lambda a,b: Or(a, b == arg), child_prods, False)
