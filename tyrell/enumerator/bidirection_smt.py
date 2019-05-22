@@ -139,6 +139,7 @@ class BidirectEnumerator(Enumerator):
                 'LOC cannot be non-positive: {}'.format(loc))
         self.loc = loc
         self.max_children = self.maxChildren()
+        self.builder = D.Builder(self.spec)
         self.lines, self.nodes = self.buildKLines(self.max_children, self.loc, self.z3_solver)
         self.model = None
         self.createStmtConstraints()
@@ -172,37 +173,24 @@ class BidirectEnumerator(Enumerator):
             self.blockModel()
 
     def buildProgram(self):
-        result = [0] * len(self.model)
-        for x in self.model:
-            c = x()
-            a = str(x)
-            if a[:1] == 'n':
-                result[int(a[1:]) - 1] = int(str(self.model[c]))
+        return self.stmtToAST(self.lines[-1])
 
-        self.program2tree.clear()
-
-        code = []
-        for n in self.nodes:
-            prod = self.spec.get_production_or_raise(result[n.id - 1])
-            code.append(prod)
-
-        builder = D.Builder(self.spec)
-        builder_nodes = [None] * len(self.nodes)
-        for x in range(0, len(self.nodes)):
-            y = len(self.nodes) - x - 1
-            if str(code[self.nodes[y].id - 1]).find('Empty') == -1:
-                children = []
-                if self.nodes[y].children is not None:
-                    for c in self.nodes[y].children:
-                        if str(code[c.id - 1]).find('Empty') == -1:
-                            assert builder_nodes[c.id - 1] is not None
-                            children.append(builder_nodes[c.id - 1])
-                n = code[self.nodes[y].id - 1].id
-                builder_nodes[y] = builder.make_node(n, children)
-                self.program2tree[builder_nodes[y]] = self.nodes[y]
-
-        assert(builder_nodes[0] is not None)
-        return builder_nodes[0]
+    def stmtToAST(self, stmt):
+        opcode = stmt.opcode
+        opcode_val = self.model[opcode].as_long()
+        args = stmt.args
+        children = []
+        for arg in args:
+            arg_val = self.model[arg].as_long()
+            if arg_val == -1:
+                break
+            if arg_val > 999:
+                children.append(self.stmtToAST(self.lines[arg_val - 1000]))
+            else:
+                children.append(self.builder.make_node(arg_val))
+                
+        cur = self.builder.make_node(opcode_val, children)
+        return cur
 
     def next(self):
         while True:
