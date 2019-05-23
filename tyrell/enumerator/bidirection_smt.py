@@ -9,19 +9,6 @@ from ..logger import get_logger
 
 logger = get_logger('tyrell.enumerator.bidirection_smt')
 
-
-class AST:
-    def __init__(self):
-        self.head = None
-
-
-class ASTNode:
-    def __init__(self, nb=None, depth=None, children=None):
-        self.id = nb
-        self.depth = depth
-        self.children = children
-        self.production = None
-
 # Each statement has opcode, args, and lhs.
 class Stmt:
     def __init__(self, opcode, args, lhs):
@@ -53,8 +40,8 @@ class BidirectEnumerator(Enumerator):
 
     def createStmtConstraints(self):
         functions = list(filter(lambda x: x.is_function() and x.id > 0, self.spec.productions()))
-        for p in functions:
-            print(p, p.id)
+        # for p in self.spec.productions():
+        #     print('&&&&&&&&&&&&&', p, p.id)
 
         # for st in self.lines:
         for i_loc in range(0, self.loc):
@@ -81,7 +68,7 @@ class BidirectEnumerator(Enumerator):
                         ctr_arg = reduce(lambda a,b: Or(a, b == arg), child_prods, False)
                         self.z3_solver.add(Implies(opcode == p.id, ctr_arg))
                     else:
-                        self.z3_solver.add(arg == -1)
+                        self.z3_solver.add(Implies(opcode == p.id, arg == -1))
 
     def createDefuseConstraints(self):
         '''All input and intermediate vars will appear at least once in the program'''
@@ -116,9 +103,13 @@ class BidirectEnumerator(Enumerator):
             args = []
             for i in range(0, children):
                 arg_name = 'arg' + str(i) + '@' + str(l)
-                args.append(Int(arg_name))
+                arg_var = Int(arg_name)
+                self.variables.append(arg_var)
+                args.append(arg_var)
             st = Stmt(opcode, args, lhs)
             lines.append(st)
+            self.variables.append(lhs)
+            self.variables.append(opcode)
             self.z3_solver.add(lhs == (1000 + l))
 
         return lines, None
@@ -157,22 +148,16 @@ class BidirectEnumerator(Enumerator):
 
     def update(self, info=None):
         # TODO: block more than one model
-        # self.blockModel() # do I need to block the model anyway?
         if info is not None and not isinstance(info, str):
             for core in info:
-                ctr = None
-                for constraint in core:
-                    if ctr is None:
-                        ctr = self.variables[self.program2tree[constraint[0]
-                                                               ].id - 1] != constraint[1].id
-                    else:
-                        ctr = Or(
-                            ctr, self.variables[self.program2tree[constraint[0]].id - 1] != constraint[1].id)
+                ctr = reduce(lambda a,b: Or(a, self.program2tree[b[0]] != b[1].id), core, False)
+                # print('blocking=============', ctr)
                 self.z3_solver.add(ctr)
         else:
             self.blockModel()
 
     def buildProgram(self):
+        self.program2tree.clear()
         return self.stmtToAST(self.lines[-1])
 
     def stmtToAST(self, stmt):
@@ -187,9 +172,12 @@ class BidirectEnumerator(Enumerator):
             if arg_val > 999:
                 children.append(self.stmtToAST(self.lines[arg_val - 1000]))
             else:
-                children.append(self.builder.make_node(arg_val))
+                child_node = self.builder.make_node(arg_val)
+                self.program2tree[child_node] = arg
+                children.append(child_node)
                 
         cur = self.builder.make_node(opcode_val, children)
+        self.program2tree[cur] = opcode
         return cur
 
     def next(self):
@@ -198,9 +186,11 @@ class BidirectEnumerator(Enumerator):
             res = self.z3_solver.check()
             if res == sat:
                 self.model = self.z3_solver.model()
-                print(self.model)
+                # print(self.model)
 
             if self.model is not None:
                 return self.buildProgram()
             else:
+                # for ass in self.z3_solver.assertions():
+                #     print(ass)
                 return None
