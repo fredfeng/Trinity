@@ -26,24 +26,15 @@ class BidirectEnumerator(Enumerator):
     # z3 solver
     z3_solver = Solver()
 
-    # productions that are leaf
-    leaf_productions = []
-
     # z3 variables for each production node
     variables = []
-
-    # z3 variables to denote if a node is a function or not
-    variables_fun = []
 
     # map from internal k-tree to nodes of program
     program2tree = {}
 
     def createStmtConstraints(self):
         functions = list(filter(lambda x: x.is_function() and x.id > 0, self.spec.productions()))
-        # for p in self.spec.productions():
-        #     print('&&&&&&&&&&&&&', p, p.id)
-
-        # for st in self.lines:
+        
         for i_loc in range(0, self.loc):
             st = self.lines[i_loc]
             # Opcode has to be one of the high-order functions
@@ -116,9 +107,7 @@ class BidirectEnumerator(Enumerator):
 
     def __init__(self, spec, depth=None, loc=None):
         self.z3_solver = Solver()
-        self.leaf_productions = []
         self.variables = []
-        self.variables_fun = []
         self.program2tree = {}
         self.spec = spec
         if depth <= 0:
@@ -191,6 +180,4 @@ class BidirectEnumerator(Enumerator):
             if self.model is not None:
                 return self.buildProgram()
             else:
-                # for ass in self.z3_solver.assertions():
-                #     print(ass)
                 return None
