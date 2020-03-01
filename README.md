@@ -38,6 +38,7 @@ Dev Environment Setup
   Documentations will be available at `docs/_build/html/index.html`
     
 References
+- Jia Chen, Ruben Martins, Yanju Chen, Yu Feng, Isil Dillig. Trinity: An Extensible Synthesis Framework for Data Science. PVLDB'19.
 - Yu Feng, Ruben Martins, Osbert Bastani, Isil Dillig. Program Synthesis using Conflict-Driven Learning. PLDI'18.
 - Yu Feng, Ruben Martins, Jacob Van Geffen, Isil Dillig, Swarat Chaudhuri. Component-based Synthesis of Table Consolidation and Transformation Tasks from Examples. PLDI'17
 - Yu Feng, Ruben Martins, Yuepeng Wang, Isil Dillig, Thomas W. Reps. Component-Based Synthesis for Complex APIs. POPL'17
