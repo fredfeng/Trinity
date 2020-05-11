@@ -1,0 +1,10 @@
+enum ConstStr {
+  "_apple_", "_banana_"
+}
+value Empty;
+value Str;
+
+program Toy(Str, Str) -> Str;
+func const: Str -> ConstStr;
+func plus: Str -> Str, Str;
+func empty: Empty -> Empty;
