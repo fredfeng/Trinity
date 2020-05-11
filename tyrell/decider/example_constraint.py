@@ -44,6 +44,8 @@ class Z3Encoder(GenericVisitor):
         self._indexer = indexer
         self._example = example
         self._unsat_map = dict()
+        self._alignment_map = dict()
+        self._alignment_counter = 0
         self._solver = z3.Solver()
 
     def get_z3_var(self, node: Node, pname: str, ptype: ExprType):
@@ -61,6 +63,13 @@ class Z3Encoder(GenericVisitor):
         var_name = '@n{}_c{}'.format(node_id, index)
         return var_name
 
+    def _get_alignment_var(self, node: Node, index: int):
+        node_id = self._indexer.get_id(node)
+        # var_name = '@n{}_a{}'.format(node_id, index)
+        var_name = '@n{}_a{}'.format(node_id, self._alignment_counter)
+        self._alignment_counter += 1
+        return var_name
+
     def encode_param_alignment(self, node: Node, ty: ValueType, index: int):
         if not isinstance(ty, ValueType):
             raise RuntimeError(
@@ -70,7 +79,11 @@ class Z3Encoder(GenericVisitor):
             expected_expr = PropertyExpr(pname, pty, ParamExpr(index))
             expected = eval_expr(
                 self._interp, self._example.input, self._example.output, expected_expr)
-            self._solver.add(actual == expected)
+            # self._solver.add(actual == expected)
+            qname = self._get_alignment_var(node, index)
+            self._unsat_map[qname] = (node, index)
+            self._alignment_map[qname] = (actual==expected)
+            self._solver.assert_and_track(actual==expected, qname)
 
     def encode_output_alignment(self, prog: Node):
         out_ty = cast(ValueType, prog.type)
@@ -114,7 +127,10 @@ class Z3Encoder(GenericVisitor):
         unsat_dict = defaultdict(list)
         for v in unsat_core:
             node, cidx = self._unsat_map[str(v)]
-            unsat_dict[node].append(node.production.constraints[cidx])
+            if isinstance(node, ParamNode):
+                unsat_dict[node].append(self._alignment_map[str(v)])
+            else:
+                unsat_dict[node].append(node.production.constraints[cidx])
         return unsat_dict
 
 
