@@ -92,8 +92,3 @@ func inner_join: Table r -> Table a, Table b {
   col(r) < col(a) + col(b);
 }
 
-predicate is_parent(spread, unite, 100);
-predicate is_parent(unite, gather, 100);
-predicate occurs(spread, 100);
-predicate occurs(unite, 100);
-predicate occurs(gather, 100);
