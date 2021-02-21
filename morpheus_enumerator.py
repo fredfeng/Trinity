@@ -3,7 +3,7 @@
 import argparse
 import tyrell.spec as S
 from tyrell.interpreter import PostOrderInterpreter, GeneralError
-from tyrell.enumerator import SmtEnumerator
+from tyrell.enumerator import BidirectEnumerator
 from tyrell.decider import Example, ExampleConstraintPruningDecider
 from tyrell.synthesizer import Synthesizer
 from tyrell.logger import get_logger
@@ -343,10 +343,13 @@ def main():
     spec = S.parse_file('example/morpheus.tyrell')
     logger.info('Parsing succeeded')
 
+    # Reading the n-gram model.
+    sketches = [line.strip() for line in open("./ngram.txt", 'r')]
+
     logger.info('Building synthesizer...')
     synthesizer = Synthesizer(
         #loc: # of function productions
-        enumerator=SmtEnumerator(spec, depth=depth_val, loc=loc_val),
+        enumerator=BidirectEnumerator(spec, depth=depth_val, loc=loc_val, sk_queue=sketches),
         decider=ExampleConstraintPruningDecider(
             spec=spec,
             interpreter=MorpheusInterpreter(),
