@@ -141,6 +141,7 @@ class BidirectEnumerator(Enumerator):
                     break
 
         # print(op_ids)
+        self.z3_solver.push()
         for i_loc in range(0, self.loc):
             st = self.lines[i_loc]
             opcode = st.opcode
@@ -189,7 +190,7 @@ class BidirectEnumerator(Enumerator):
                 
         cur = self.builder.make_node(opcode_val, children)
         self.program2tree[cur] = opcode
-        print('prog:', cur)
+        # print('prog:', cur)
         return cur
 
     def next(self):
@@ -204,14 +205,7 @@ class BidirectEnumerator(Enumerator):
                 return self.buildProgram()
             else:
                 if self.sk_queue:
-                    self.variables = []
-                    self.program2tree = {}
-                    self.z3_solver = Solver()
-                    self.lines, self.nodes = self.buildKLines(self.max_children, self.loc, self.z3_solver)
-
-                    self.model = None
-                    self.createStmtConstraints()
-                    self.createDefuseConstraints()
+                    self.z3_solver.pop()
                     sketch = self.sk_queue.popleft()
                     op_codes = sketch.split()
                     op_ids = []
@@ -221,6 +215,7 @@ class BidirectEnumerator(Enumerator):
                                 op_ids.append(f.id)
                                 break
 
+                    self.z3_solver.push()
                     for i_loc in range(0, self.loc):
                         st = self.lines[i_loc]
                         opcode = st.opcode
