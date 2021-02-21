@@ -2,8 +2,6 @@ from z3 import *
 from collections import deque
 from .enumerator import Enumerator
 from functools import reduce
-
-
 from .. import dsl as D
 from ..logger import get_logger
 
@@ -37,14 +35,13 @@ class BidirectEnumerator(Enumerator):
     _functions = []
 
     def createStmtConstraints(self):
-        functions = list(filter(lambda x: x.is_function() and x.id > 0, self.spec.productions()))
         self._functions = list(filter(lambda x: x.is_function() and x.id > 0, self.spec.productions()))
         
         for i_loc in range(0, self.loc):
             st = self.lines[i_loc]
             # Opcode has to be one of the high-order functions
             opcode = st.opcode
-            ctr_opcode = reduce(lambda a,b: Or(a, b.id == opcode), functions, False)
+            ctr_opcode = reduce(lambda a,b: Or(a, b.id == opcode), self._functions, False)
             self.z3_solver.add(ctr_opcode)
 
             # All vars defined beforehand.
@@ -54,7 +51,7 @@ class BidirectEnumerator(Enumerator):
             for i in range(0, self.max_children):
                 # print('line: ', opcode, ' arg: ', i)
                 arg = st.args[i]
-                for p in functions:
+                for p in self._functions:
                     if i < len(p.rhs):
                         child_type = str(p.rhs[i])
                         child_prods = self.spec.get_productions_with_lhs(child_type)
@@ -130,23 +127,7 @@ class BidirectEnumerator(Enumerator):
         self.createStmtConstraints()
         self.createDefuseConstraints()
         self.sk_queue = deque(sk_queue)
-        sketch = self.sk_queue.popleft()
-
-        op_codes = sketch.split()
-        op_ids = []
-        for c in op_codes:
-            for f in self._functions:
-                if f.name == c:
-                    op_ids.append(f.id)
-                    break
-
-        # print(op_ids)
-        self.z3_solver.push()
-        for i_loc in range(0, self.loc):
-            st = self.lines[i_loc]
-            opcode = st.opcode
-            ctr_opcode = (op_ids[i_loc] == opcode)
-            self.z3_solver.add(ctr_opcode)
+        self.enforceSketch(self.sk_queue.popleft())
 
     def blockModel(self):
         assert(self.model is not None)
@@ -190,8 +171,15 @@ class BidirectEnumerator(Enumerator):
                 
         cur = self.builder.make_node(opcode_val, children)
         self.program2tree[cur] = opcode
-        # print('prog:', cur)
         return cur
+
+    def enforceSketch(self, sk):
+        op_ids = list(map(lambda x: list(filter(lambda e: e.name==x, 
+                                    self._functions))[0].id, sk.split()))
+        self.z3_solver.push()
+        ctr_opcode = reduce(lambda a,b: And(a, self.lines[b].opcode == op_ids[b]), 
+                            range(0, self.loc), True)
+        self.z3_solver.add(ctr_opcode)
 
     def next(self):
         while True:
@@ -199,32 +187,15 @@ class BidirectEnumerator(Enumerator):
             res = self.z3_solver.check()
             if res == sat:
                 self.model = self.z3_solver.model()
-                # print(self.model)
 
             if self.model is not None:
                 return self.buildProgram()
             else:
                 if self.sk_queue:
                     self.z3_solver.pop()
-                    sketch = self.sk_queue.popleft()
-                    op_codes = sketch.split()
-                    op_ids = []
-                    for c in op_codes:
-                        for f in self._functions:
-                            if f.name == c:
-                                op_ids.append(f.id)
-                                break
-
-                    self.z3_solver.push()
-                    for i_loc in range(0, self.loc):
-                        st = self.lines[i_loc]
-                        opcode = st.opcode
-                        ctr_opcode = (op_ids[i_loc] == opcode)
-                        self.z3_solver.add(ctr_opcode)
-                    
+                    self.enforceSketch(self.sk_queue.popleft())
                     self.z3_solver.check()
                     self.model = self.z3_solver.model()
                     return self.buildProgram()
-
                 else:
                     return None
