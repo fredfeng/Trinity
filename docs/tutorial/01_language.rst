@@ -94,7 +94,7 @@ The :func:`~tyrell.spec.do_parse.parse_file` function takes file path as a param
 .. code-block:: python
 
   from tyrell.spec import parse
-  spec = parse_file(r'''
+  spec = parse(r'''
       enum IntConst {
         "0", "1", "2"
       }
