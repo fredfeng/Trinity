@@ -176,9 +176,9 @@ For example, a simple interpreter for the small language we defined in the previ
 
   # Create the interpreter object and run it
   interp = BinaryArithFuncInterpreter()
-  print(interp.eval(builder.from_sexp_string('(@param 0)', [3, 4])))    # Prints 0
-  print(interp.eval(builder.from_sexp_string('(const (IntConst 1))', [3, 4])))  # Prints 0
-  print(interp.eval(builder.from_sexp_string('(plus (@param 1) (IntConst 2))', [3, 4])))  # Prints 0
+  print(interp.eval(builder.from_sexp_string('(@param 0)'), [3, 4]))    # Prints 0
+  print(interp.eval(builder.from_sexp_string('(const (IntConst 1))'), [3, 4]))  # Prints 0
+  print(interp.eval(builder.from_sexp_string('(plus (@param 1) (const (IntConst 2)))'), [3, 4]))  # Prints 0
 
 Well, this is not a super interesting interpreter, as it interprets any program to ``0``. To make it more interesting, we could have examined what the structure of ``node`` is, and take different actions according to whether it's a parameter, an enum, or a function application (in which case you may need to recurse down and interpret its arguments).
 
