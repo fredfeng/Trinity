@@ -7,7 +7,7 @@ Dev Environment Setup
 - It is preferable to have a dedicated virtualenv for this project:
 ```
     $ git clone <this repo>
-    $ cd Tyrell
+    $ cd Trinity
     $ mkdir venv
     $ python3 -m venv venv
     $ source venv/bin/activate
