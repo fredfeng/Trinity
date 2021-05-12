@@ -1,0 +1,10 @@
+"Scenario","varNew","max","mean","min"
+"base","x",2,0,-3
+"base","y",5,1,-1.5
+"base","z",2,0.25,0
+"extreme","x",3,1,-2.5
+"extreme","y",3.5,3,-3
+"extreme","z",7,5,3
+"stress","x",1,0.25,-2
+"stress","y",3,2,-2
+"stress","z",4,2,1

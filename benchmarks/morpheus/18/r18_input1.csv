@@ -1,0 +1,7 @@
+"message.id","sender","recipient"
+1,"A","A"
+1,"A","C"
+2,"A","B"
+3,"B","C"
+3,"C","D"
+3,"D","B"

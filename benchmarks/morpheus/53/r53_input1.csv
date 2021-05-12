@@ -1,0 +1,9 @@
+"posture","code","HR","EE","a"
+"cycling","A03",102,100,3
+"standing","A03",99,99,4
+"sitting","A03",98,67,5
+"walking","A03",97,78,3
+"cycling","B01",111,76,5
+"standing","B01",100,88,4
+"sitting","B01",78,34,4
+"walking","B01",99,99,2

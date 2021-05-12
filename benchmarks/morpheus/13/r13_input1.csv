@@ -1,0 +1,5 @@
+"id","type","transactions","amount"
+20,"income",20,100
+20,"expense",25,95
+30,"income",50,300
+30,"expense",45,250

@@ -1,0 +1,5 @@
+"group","times","action_rate","action_rate2"
+"a","before",0.1,0.2
+"a","after",0.15,0.25
+"b","before",0.2,0.3
+"b","after",0.18,0.28
