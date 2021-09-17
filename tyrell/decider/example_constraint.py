@@ -157,10 +157,12 @@ class BlameFinder:
                 [Blame(node=n, production=(prod if n is node else n.production))
                  for n in base_nodes]
             )
-        for expr in exprs:
-            keys = list(self._imply_map.keys())
-            for other_prod in self._imply_map.get((node.production, expr), []):
-                yield gen_blame(other_prod)
+        other_prods = set(self._imply_map.get((node.production, exprs[0]), []))
+        for expr in exprs[1:]:
+            p = self._imply_map.get((node.production, expr), [])
+            other_prods = other_prods.intersection(p)
+        for p in other_prods:
+            yield gen_blame(p)
 
     def get_blames(self) -> List[List[Blame]]:
         return [list(x) for x in self._blames_collection]
