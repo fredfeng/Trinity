@@ -4,16 +4,18 @@ Dev Environment Setup
 =====================
 - Prerequisite:
     - python 3.6+  
+    - R
 - It is preferable to have a dedicated virtualenv for this project:
 ```
     $ git clone <this repo>
-    $ cd Tyrell
+    $ cd Trinity
     $ mkdir venv
     $ python3 -m venv venv
     $ source venv/bin/activate
 ```
 - Make an editable install with `pip`. This would automatically handles package dependencies. One of our dependency, `z3-solver`, takes a long time to build. Please be patient.
 ```
+    $ pip install wheel
     $ pip install -e ".[dev]"
     $ python setup.py sdist  # for package
 ```
