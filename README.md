@@ -7,15 +7,21 @@ Dev Environment Setup
 - It is preferable to have a dedicated virtualenv for this project:
 ```
     $ git clone <this repo>
-    $ cd Tyrell
+    $ cd <this repo>
+    $ cd tyrell
     $ mkdir venv
     $ python3 -m venv venv
     $ source venv/bin/activate
+    $ cd ..
 ```
+- Install R if you have not.
+- Install the R packages `dplyr`, `tidyr`, and `compare`
 - Make an editable install with `pip`. This would automatically handles package dependencies. One of our dependency, `z3-solver`, takes a long time to build. Please be patient.
 ```
+    $ python3 -m pip install --upgrade pip
+    $ pip install wheel sexpdata rpy2 compare
     $ pip install -e ".[dev]"
-    $ python setup.py sdist  # for package
+    $ python3 setup.py sdist  # for package
 ```
 - Test whether the installation is successful
 ```
@@ -30,7 +36,7 @@ Dev Environment Setup
     $ python setup.py sdist
 ```
   Tarball will be available at `dist/tyrell-<version>.tar.gz`
-- Build HTML documentations
+- Build HTML documentation
 ```
     $ cd docs
     $ make html
