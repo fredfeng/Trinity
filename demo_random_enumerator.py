@@ -3,7 +3,7 @@
 from sys import argv
 import tyrell.spec as S
 from tyrell.interpreter import PostOrderInterpreter
-from tyrell.enumerator import RandomEnumerator
+from tyrell.enumerator import RandomEnumerator, RelaxedRandomEnumerator
 from tyrell.decider import Example, ExampleDecider
 from tyrell.synthesizer import Synthesizer
 from tyrell.logger import get_logger
@@ -60,8 +60,12 @@ def main(seed=None):
 
     logger.info('Building synthesizer...')
     synthesizer = Synthesizer(
+        # RandomEnumerator samples ASTs with depths of [0, max_depth)
         enumerator=RandomEnumerator(
-            spec, max_depth=4, seed=seed),
+            spec, max_depth=1, seed=seed),
+        # RelaxedRandomEnumerator will sample ASTs with depths of [min_depth, max_depth]
+        # enumerator=RelaxedRandomEnumerator(
+        #     spec, max_depth=2, min_depth=0, seed=seed),
         decider=ExampleDecider(
             interpreter=ToyInterpreter(),
             examples=[
